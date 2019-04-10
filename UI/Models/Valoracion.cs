@@ -5,8 +5,11 @@ using System.Web;
 
 namespace UI.Models
 {
-    public class Carrito
+    public class Valoracion
     {
-        public IEnumerable<Detalle> Productos { get; set; }
+        public long Total_Valoraciones { get; set; }
+
+        public int Valor { get; set; }
+
     }
 }
