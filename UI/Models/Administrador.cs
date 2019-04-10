@@ -8,7 +8,7 @@ using System.Web;
 
 namespace UI.Models
 {
-    public class Cliente
+    public class Administrador
     {
         [BsonId]
         [Required]
@@ -22,10 +22,6 @@ namespace UI.Models
         [DisplayName("Segundo Apellido")]
         public String Segundo_Apellido { get; set; }
         [Required]
-        [BsonDateTimeOptions(DateOnly =true)]
-        [DisplayName("Fecha de Nacimiento")]
-        public DateTime Fecha_Nacimiento { get; set; }
-        [Required]
         public String Usuario { get; set; }
         [Required]
         [DisplayName("Contraseña")]
@@ -35,9 +31,5 @@ namespace UI.Models
         [Required]
         [DisplayName("Email")]
         public String Correo { get; set; }
-
-        public IEnumerable<Tarjeta> Targetas_Credito { get; set; }
-
-        public IEnumerable<Producto> Deseos { get; set; }
     }
 }

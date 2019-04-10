@@ -3,6 +3,8 @@ using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Web;
 
 namespace UI.Models
@@ -19,12 +21,15 @@ namespace UI.Models
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public String Id { get; set; }
         public String Empresa { get => "WishCR"; }
         public String Cedula_Juridica { get => "3-101-013528"; }
+        [Required]
         public long Numero_Factura { get; set; }
         public DateTime Fecha { get => DateTime.Now; }
+        [Required]
         public Cliente Cliente { get; set; }
+        [Required]
         public IEnumerable<Detalle> Detalles { get; set; }
         public Double Subtotal { get => Detalles.Sum(d => d.Subtotal); }
         public Int32 IVA { get => 13; }
