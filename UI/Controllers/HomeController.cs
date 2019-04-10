@@ -15,6 +15,12 @@ namespace UI.Controllers
         {
             //MongoContext mc = new MongoContext();
             //ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
+            MongoContext mc = new MongoContext();
+            var productos = mc.Productos.AsQueryable().ToList();
+            ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
+            ViewBag.Productos = productos;
+            ViewBag.ProductosNuevos = (from p in productos where (p.Fecha_Ingreso.Date - DateTime.Now.Date).Days < 25 select p).ToList();
+            ViewBag.ProductosValorados = productos.OrderBy(p => p.Valoracion.Valor).Take(16);
             return View();
         }
         public ActionResult About()

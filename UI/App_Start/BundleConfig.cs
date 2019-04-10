@@ -24,7 +24,7 @@ namespace UI
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/font-awesome.css",
+                      "~/Content/font-awesome.min.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/greensock").Include("~/Scripts/TweenMax.min.js","~/Scripts/TimelineMax.min.js","~/Scripts/animation.gsap.min.js","~/Scripts/ScrollToPlugin.min.js"));
