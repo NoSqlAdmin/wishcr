@@ -13,11 +13,15 @@ namespace UI.Controllers
     {
         public ActionResult Index()
         {
+            //MongoContext mc = new MongoContext();
+            //ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
             return View();
         }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+            //MongoContext mc = new MongoContext();
+            //ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
             //MongoContext mc = new MongoContext();
             //var Categorias = new List<Categoria> {
             //    new Categoria { Descripcion = "Todo en camaras y accesorios de fotografia", Nombre = "Camaras" },
@@ -48,7 +52,9 @@ namespace UI.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
+            //MongoContext mc = new MongoContext();
+            //ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
+            //mc.Categorias.AsQueryable().ToList().Take(5);
             return View();
         }
     }

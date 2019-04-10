@@ -1,9 +1,14 @@
-﻿<!DOCTYPE html>
+﻿
+@using UI.Controllers;
+@using UI.Models;
+@using MongoDB.Driver;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - WishCR</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/slickcss")
     @Styles.Render("~/Content/OwlCarousel2css")
@@ -11,6 +16,14 @@
     @RenderSection("styles", required: false)
 </head>
 <body>
+    @{
+        string rutaCategoria(string categoria)
+        {
+            return "/Home/About";
+        }
+        MongoContext mc = new MongoContext();
+        ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
+    }
     @*<div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -38,33 +51,33 @@
             <div class="container">
                 <div class="row">
                     <div class="col d-flex flex-row">
-                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/images/phone.png" alt=""></div>+38 068 005 3570</div>
-                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/images/phone.png" alt=""></div>+506 2205 3570</div>
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/images/mail.png" alt=""></div><a href="wishcr@gmail.com">wishcr@gmail.com</a></div>
                         <div class="top_bar_content ml-auto">
                             <div class="top_bar_menu">
-                                <ul class="standard_dropdown top_bar_dropdown">
-                                    <li>
-                                        <a href="#">English<i class="fas fa-chevron-down"></i></a>
-                                        <ul>
-                                            <li><a href="#">Italian</a></li>
-                                            <li><a href="#">Spanish</a></li>
-                                            <li><a href="#">Japanese</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
-                                        <ul>
-                                            <li><a href="#">EUR Euro</a></li>
-                                            <li><a href="#">GBP British Pound</a></li>
-                                            <li><a href="#">JPY Japanese Yen</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                @*<ul class="standard_dropdown top_bar_dropdown">
+                                        <li>
+                                            <a href="#">English<i class="fas fa-chevron-down"></i></a>
+                                            <ul>
+                                                <li><a href="#">Italian</a></li>
+                                                <li><a href="#">Spanish</a></li>
+                                                <li><a href="#">Japanese</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
+                                            <ul>
+                                                <li><a href="#">EUR Euro</a></li>
+                                                <li><a href="#">GBP British Pound</a></li>
+                                                <li><a href="#">JPY Japanese Yen</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>*@
                             </div>
                             <div class="top_bar_user">
                                 <div class="user_icon"><img src="~/images/user.svg" alt=""></div>
-                                <div><a href="#">Register</a></div>
-                                <div><a href="#">Sign in</a></div>
+                                <div><a href="#">Registrarse</a></div>
+                                <div><a href="#">Ingresar</a></div>
                             </div>
                         </div>
                     </div>
@@ -81,7 +94,7 @@
                     <!-- Logo -->
                     <div class="col-lg-2 col-sm-3 col-3 order-1">
                         <div class="logo_container">
-                            <div class="logo"><a href="#">OneTech</a></div>
+                            <div class="logo"><a href="#">WishCR</a></div>
                         </div>
                     </div>
 
@@ -90,19 +103,17 @@
                         <div class="header_search">
                             <div class="header_search_content">
                                 <div class="header_search_form_container">
-                                    <form action="#" class="header_search_form clearfix">
-                                        <input type="search" required="required" class="header_search_input" placeholder="Search for products...">
+                                    <form action="/Home/Contact" class="header_search_form clearfix">
+                                        <input type="search" required="required" class="header_search_input" placeholder="Buscar Productos...">
                                         <div class="custom_dropdown">
                                             <div class="custom_dropdown_list">
-                                                <span class="custom_dropdown_placeholder clc">All Categories</span>
+                                                <span class="custom_dropdown_placeholder clc">Todas las Categorias</span>
                                                 <i class="fas fa-chevron-down"></i>
                                                 <ul class="custom_list clc">
-                                                    <li><a class="clc" href="#">All Categories</a></li>
-                                                    <li><a class="clc" href="#">Computers</a></li>
-                                                    <li><a class="clc" href="#">Laptops</a></li>
-                                                    <li><a class="clc" href="#">Cameras</a></li>
-                                                    <li><a class="clc" href="#">Hardware</a></li>
-                                                    <li><a class="clc" href="#">Smartphones</a></li>
+                                                    @foreach (var c in ViewBag.Categorias)
+                                                    {
+                                                        <li><a class="clc" href="@rutaCategoria(c.Nombre)">@c.Nombre</a></li>
+                                                    }
                                                 </ul>
                                             </div>
                                         </div>
@@ -119,7 +130,7 @@
                             <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                                 <div class="wishlist_icon"><img src="~/images/heart.png" alt=""></div>
                                 <div class="wishlist_content">
-                                    <div class="wishlist_text"><a href="#">Wishlist</a></div>
+                                    <div class="wishlist_text"><a href="#">Deseos</a></div>
                                     <div class="wishlist_count">115</div>
                                 </div>
                             </div>
@@ -161,31 +172,10 @@
                                 </div>
 
                                 <ul class="cat_menu">
-                                    <li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
-                                    <li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
-                                    <li class="hassubs">
-                                        <a href="#">Hardware<i class="fas fa-chevron-right"></i></a>
-                                        <ul>
-                                            <li class="hassubs">
-                                                <a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-                                                <ul>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>
+                                    @foreach (var c in ((List<Categoria>)ViewBag.Categorias).Take(10))
+                                    {
+                                        <li><a href="@rutaCategoria(c.Nombre)">@c.Nombre<i class="fas fa-chevron-right ml-auto"></i></a></li>
+                                    }
                                 </ul>
                             </div>
 
@@ -347,6 +337,26 @@
         </div>
 
     </header>
+
+    <!-- Banner -->
+
+    <div class="banner">
+        <div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
+        <div class="container fill_height">
+            <div class="row fill_height">
+                <div class="banner_product_image"><img src="~/images/banner_product.png" alt=""></div>
+                <div class="col-lg-5 offset-lg-4 fill_height">
+                    <div class="banner_content">
+                        <h1 class="banner_text">new era of smartphones</h1>
+                        <div class="banner_price"><span>$530</span>$460</div>
+                        <div class="banner_product_name">Apple Iphone 6s</div>
+                        <div class="button banner_button"><a href="#">Shop Now</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div>
         @RenderBody()
         <hr />
@@ -440,7 +450,7 @@
                             <div class="copyright_content">
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This page is made in Fidelitas University <i class="fa fa-heart" aria-hidden="true"></i>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </div>
                             <div class="logos ml-sm-auto">
