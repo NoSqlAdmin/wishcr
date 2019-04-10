@@ -22,7 +22,12 @@ namespace UI.Models
         [DisplayName("Descripción")]
         public String Descripcion { get; set; }
         [Required]
+        public String Marca { get; set; }
+        [Required]
         public Double Precio { get; set; }
+        [DisplayName("Fecha de Ingreso")]
+        [BsonDateTimeOptions(DateOnly = true)]
+        public DateTime Fecha_Ingreso => DateTime.Now.Date;
         [Required]
         public String Imagen { get; set; }
         [Required]

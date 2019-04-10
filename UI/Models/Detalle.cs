@@ -13,7 +13,7 @@ namespace UI.Models
         public Int32 Cantidad { get; set; }
         [Required]
         public Producto Producto { get; set; }
-    
-        public Double Subtotal { get => (Producto.Precio * Cantidad); }
+
+        public Double Subtotal => (Producto.Precio * Cantidad);
     }
 }
