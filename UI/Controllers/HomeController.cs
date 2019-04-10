@@ -26,7 +26,7 @@ namespace UI.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-            //MongoContext mc = new MongoContext();
+            MongoContext mc = new MongoContext();
             //ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
             //MongoContext mc = new MongoContext();
             //var Categorias = new List<Categoria> {
@@ -52,6 +52,27 @@ namespace UI.Controllers
             //    Valoracion = new Valoracion { Total_Valoraciones = 1, Valor = 5}
             //};
             //mc.Productos.InsertOne(pro);
+
+            Cliente cliente = new Cliente
+            {
+                Cedula = "113960817",
+                Contrasena = "contraseña",
+                Correo = "david@gmail.com",
+                Deseos = new List<Producto>(),
+                Direccion = "La león 13",
+                Fecha_Nacimiento = new DateTime(2000,5,13).Date,
+                Nombre = "David",
+                Primer_Apellido = "Campos",
+                Segundo_Apellido = "Chavarría",
+                Targetas_Credito = new List<Tarjeta>() { new Tarjeta {
+                    CodigoSeguridad = 4545,
+                    FechaExpiracion = new DateTime(2040,5,12),
+                    NumeroTarjeta = "66-4646-44-4455"
+                }
+                },
+                Usuario = "davidcc"
+            };
+            mc.Clientes.InsertOne(cliente);
             return View();
         }
 

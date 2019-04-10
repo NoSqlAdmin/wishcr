@@ -475,16 +475,52 @@ $(document).ready(function()
 
 	*/
 
+    function ajax_post_method(path, parameterName, targetId, parameterValue) {
+        $.ajax({
+            type: "POST",
+            cache: false,
+            url: path,
+            data: '{"' + parameterName + '": "' + parameterValue + '" }',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $("#" + targetId + "").html(data);
+            },
+            error: function () {
+                //alert('Por favor intente de nuevo.');
+            }
+        });
+    }
+
 	function initFavs()
 	{
 		// Handle Favorites
 		var items = document.getElementsByClassName('product_fav');
 		for(var x = 0; x < items.length; x++)
 		{
-			var item = items[x];
-			item.addEventListener('click', function(fn)
+            var item = items[x];
+            var self = this;
+            item.addEventListener('click', function (fn, self = this)
 			{
-				fn.target.classList.toggle('active');
+                fn.target.classList.toggle('active');
+                var parameter = fn.target.children[0].value;
+                var parameterValue = parameter.split(" ")[0];
+                var path = "/Deseos/Create"; var parameterName = "name"; var targetId = "nose"; 
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: path,
+                    data: '{"' + parameterName + '": "' + parameterValue + '" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        alert('Por favor intente de nuevo.');
+                    },
+                    error: function () {
+                        //alert('Por favor intente de nuevo.');
+                    }
+                });
+                //console.log(fn.target.id);
 			});
 		}
 	}
@@ -993,7 +1029,7 @@ $(document).ready(function()
 				    // find the amount of "seconds" between now and target
 				    var current_date = new Date().getTime();
 				    var seconds_left = (target_date - current_date) / 1000;
-				    console.log(seconds_left);
+				    //console.log(seconds_left);
 				 
 				    // do some time calculations
 				    days = parseInt(seconds_left / 86400);

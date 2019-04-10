@@ -143,6 +143,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DeseosController.cs" />
     <Compile Include="Controllers\Grifs.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MongoContext.cs" />
@@ -396,6 +397,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Deseos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

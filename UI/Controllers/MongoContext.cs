@@ -8,7 +8,7 @@ using UI.Models;
 
 namespace UI.Controllers
 {
-    public class MongoContext
+    public class MongoContext : IDisposable
     {
         private readonly MongoClient mongoCliente;
 
@@ -33,6 +33,11 @@ namespace UI.Controllers
             mongoCliente = new MongoClient(MongoconnectionString);
             // Obteniendo la base de datos
             db = mongoCliente.GetDatabase(MongoDatabaseName);
+        }
+
+        public void Dispose()
+        {
+            mongoCliente.StartSession().Dispose();
         }
     }
 }
