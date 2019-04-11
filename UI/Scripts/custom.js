@@ -499,28 +499,31 @@ $(document).ready(function()
 		for(var x = 0; x < items.length; x++)
 		{
             var item = items[x];
-            var self = this;
-            item.addEventListener('click', function (fn, self = this)
+            item.addEventListener('click', function (fn)
 			{
                 fn.target.classList.toggle('active');
                 var parameter = fn.target.children[0].value;
-                var parameterValue = parameter.split(" ")[0];
-                var path = "/Deseos/Create"; var parameterName = "name"; var targetId = "nose"; 
-                $.ajax({
-                    type: "POST",
-                    cache: false,
-                    url: path,
-                    data: '{"' + parameterName + '": "' + parameterValue + '" }',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (data) {
-                        alert('Por favor intente de nuevo.');
-                    },
-                    error: function () {
-                        //alert('Por favor intente de nuevo.');
-                    }
-                });
-                //console.log(fn.target.id);
+                if (parameter !== "ninguno") {
+                    var parameterValue1 = parameter.split(" ")[0];
+                    var parameterValue2 = parameter.split(" ")[1];
+                    var path = "/Deseos/Create";
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: path,
+                        data: '{"producto": "' + parameterValue1 + '", "cedula" : "' + parameterValue2 + '" }',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data == "Success") {
+
+                            }
+                        },
+                        error: function () {
+                            alert(data);
+                        }
+                    });
+                }
 			});
 		}
 	}

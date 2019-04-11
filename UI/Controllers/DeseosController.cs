@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,23 +26,22 @@ namespace UI.Controllers
 
         [HttpPost]
         // GET: Deseos/Create
-        public  JsonResult Create(string name/*string producto, string cedula = "ninguno"*/)
+        public async Task<JsonResult> Create(string producto, string cedula)
         {
-            string cedula = "ss";
-            if (cedula.Equals(name)) return Json("Error",JsonRequestBehavior.AllowGet);
-            using (MongoContext mc = new MongoContext())
-            {
-                //var filter = Builders<Cliente>.Filter.Eq("_id", cedula);
-                //var cliente = await mc.Clientes.Find(filter).FirstAsync();
-                //var deseo = await mc.Productos.Find(Builders<Producto>.Filter.Eq("_id",producto)).FirstAsync();
-                //cliente.Deseos.ToList().Add(deseo);
-                //var update = Builders<Cliente>.Update.Set("Deseos", cliente.Deseos);
-                //var result = await mc.Clientes.UpdateOneAsync(filter, update);
-                //reu
-            }
-            return Json("Error", JsonRequestBehavior.AllowGet);
+            if (cedula.Equals("ninguno")) return Json("Error", JsonRequestBehavior.AllowGet);
+            MongoContext mc = new MongoContext();
+            var filter = Builders<Cliente>.Filter.Eq("_id", cedula);
+            var cliente = await mc.Clientes.Find(filter).FirstAsync();
+            var deseo = await mc.Productos.Find(Builders<Producto>.Filter.Eq("_id", ObjectId.Parse(producto))).FirstAsync();
+            var deseos = cliente.Deseos.ToList();
+            if (deseos.Exists(d => d.Id.Equals(deseo.Id)))
+                deseos.Remove(deseos.First(d => d.Id.Equals(deseo.Id)));
+            else
+                deseos.Add(deseo);
+            var update = Builders<Cliente>.Update.Set(c => c.Deseos, deseos);
+            var result = await mc.Clientes.FindOneAndUpdateAsync(filter, update);
+            return Json("Success", JsonRequestBehavior.AllowGet);
         }
-        
 
         // GET: Deseos/Edit/5
         public ActionResult Edit(int id)

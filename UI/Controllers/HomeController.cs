@@ -21,8 +21,14 @@ namespace UI.Controllers
             ViewBag.Productos = productos;
             ViewBag.ProductosNuevos = (from p in productos where (p.Fecha_Ingreso.Date - DateTime.Now.Date).Days < 25 select p).ToList();
             ViewBag.ProductosValorados = productos.OrderBy(p => p.Valoracion.Valor).Take(16);
+            var user = System.Web.HttpContext.Current.Session["userid"] = "113960817";
+            if (user != null)
+                ViewBag.Cliente = mc.Clientes.Find(c => c.Cedula.Equals(user.ToString())).First();
+            else
+                ViewBag.Cliente = null;
             return View();
         }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
