@@ -4,17 +4,13 @@
     ViewBag.Title = "Home";
 }
 
-@section Styles {
-    @Styles.Render("~/Content/main_styles.css")
-    @Styles.Render("~/Content/responsive.css")
-}
 @{
     string rutaCategoria(string categoria)
     {
         return "/Home/About";
+
     }
 }
-
 <!-- Characteristics -->
 
 <div class="characteristics">
@@ -183,7 +179,8 @@
                                                     if (((List<Producto>)ViewBag.Cliente.Deseos).ToList().Exists(d => d.Id.Equals(p.Id.ToString())))
                                                     {
                                                         <div class="product_fav active"><input type="hidden" value="@parameters" /><i class="fa fa-heart"></i></div>
-                                                    } else 
+                                                    }
+                                                    else
                                                     {
                                                         <div class="product_fav"><input type="hidden" value="@parameters" /><i class="fa fa-heart"></i></div>
                                                     }
@@ -269,17 +266,19 @@
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="~/images/featured_1.png" alt=""></div>
                                             <div class="product_content">
                                                 <div class="product_price">₡@p.Precio</div>
-                                                <div class="product_name"><div>
-                                                    <a href="product.html">@p.Nombre</a>
-                                                    @{var clase = "rating_r_" + (int)p.Valoracion.Valor; }
-                                                    <div class="rating_r @clase banner_2_rating">
-                                                        @for (int i = 0; i < (int)@p.Valoracion.Valor; i++)
-                                                        {
-                                                            <i></i>
-                                                        }
+                                                <div class="product_name">
+                                                    <div>
+                                                        <a href="product.html">@p.Nombre</a>
+                                                        @{var clase = "rating_r_" + (int)p.Valoracion.Valor; }
+                                                        <div class="rating_r @clase banner_2_rating">
+                                                            @for (int i = 0; i < (int)@p.Valoracion.Valor; i++)
+                                                            {
+                                                                <i></i>
+                                                            }
+                                                        </div>
+                                                        @*Estrellas: @pforloracion.Valor*@
                                                     </div>
-                                                    @*Estrellas: @pforloracion.Valor*@
-                                                </div></div>
+                                                </div>
                                                 <div class="product_extras">
                                                     <div class="product_color">
                                                         <input type="radio" checked name="product_color" style="background:#b19c83">

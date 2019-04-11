@@ -13,11 +13,8 @@ namespace UI.Controllers
     {
         public ActionResult Index()
         {
-            //MongoContext mc = new MongoContext();
-            //ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
             MongoContext mc = new MongoContext();
             var productos = mc.Productos.AsQueryable().ToList();
-            ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
             ViewBag.Productos = productos;
             var nuevos = (from p in productos where (p.Fecha_Ingreso.Date - DateTime.Now.Date).Days < 25 select p).ToList();
             ViewBag.ProductosNuevos = nuevos;
@@ -25,11 +22,7 @@ namespace UI.Controllers
             ViewBag.ProductosComputadoras = (from p in nuevos where p.Categoria.Nombre.Equals("Computadoras y Laptops") select p).OrderBy(p => p.Fecha_Ingreso).Take(16);
             ViewBag.ProductosVideos = (from p in nuevos where p.Categoria.Nombre.Equals("TV y Audio") select p).OrderBy(p => p.Fecha_Ingreso).Take(16);
             ViewBag.ProductosValorados = productos.OrderBy(p => p.Valoracion.Valor).Take(16);
-            var user = System.Web.HttpContext.Current.Session["userid"] = "113960817";
-            if (user != null)
-                ViewBag.Cliente = mc.Clientes.Find(c => c.Cedula.Equals(user.ToString())).First();
-            else
-                ViewBag.Cliente = null;
+            ViewBag.Cliente = Store.Default.Cliente;
             return View();
         }
 
@@ -63,35 +56,32 @@ namespace UI.Controllers
                   //};
                   //mc.Productos.InsertOne(pro);
 
-                  Cliente cliente = new Cliente
-            {
-                Cedula = "113960817",
-                Contrasena = "contraseña",
-                Correo = "david@gmail.com",
-                Deseos = new List<Producto>(),
-                Direccion = "La león 13",
-                Fecha_Nacimiento = new DateTime(2000,5,13).Date,
-                Nombre = "David",
-                Primer_Apellido = "Campos",
-                Segundo_Apellido = "Chavarría",
-                Targetas_Credito = new List<Tarjeta>() { new Tarjeta {
-                    CodigoSeguridad = 4545,
-                    FechaExpiracion = new DateTime(2040,5,12),
-                    NumeroTarjeta = "66-4646-44-4455"
-                }
-                },
-                Usuario = "davidcc"
-            };
-            mc.Clientes.InsertOne(cliente);
+            //      Cliente cliente = new Cliente
+            //{
+            //    Cedula = "113960817",
+            //    Contrasena = "contraseña",
+            //    Correo = "david@gmail.com",
+            //    Deseos = new List<Producto>(),
+            //    Direccion = "La león 13",
+            //    Fecha_Nacimiento = new DateTime(2000,5,13).Date,
+            //    Nombre = "David",
+            //    Primer_Apellido = "Campos",
+            //    Segundo_Apellido = "Chavarría",
+            //    Targetas_Credito = new List<Tarjeta>() { new Tarjeta {
+            //        CodigoSeguridad = 4545,
+            //        FechaExpiracion = new DateTime(2040,5,12),
+            //        NumeroTarjeta = "66-4646-44-4455"
+            //    }
+            //    },
+            //    Usuario = "davidcc"
+            //};
+            //mc.Clientes.InsertOne(cliente);
             return View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-            //MongoContext mc = new MongoContext();
-            //ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
-            //mc.Categorias.AsQueryable().ToList().Take(5);
             return View();
         }
     }

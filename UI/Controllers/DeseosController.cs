@@ -13,7 +13,7 @@ namespace UI.Controllers
     public class DeseosController : Controller
     {
         // GET: Deseos
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
             return View();
         }
@@ -34,57 +34,17 @@ namespace UI.Controllers
             var cliente = await mc.Clientes.Find(filter).FirstAsync();
             var deseo = await mc.Productos.Find(Builders<Producto>.Filter.Eq("_id", ObjectId.Parse(producto))).FirstAsync();
             var deseos = cliente.Deseos.ToList();
+            var resultado = "Success++";
             if (deseos.Exists(d => d.Id.Equals(deseo.Id)))
+            {
                 deseos.Remove(deseos.First(d => d.Id.Equals(deseo.Id)));
-            else
+                resultado = "Success--";
+            } else
                 deseos.Add(deseo);
             var update = Builders<Cliente>.Update.Set(c => c.Deseos, deseos);
             var result = await mc.Clientes.FindOneAndUpdateAsync(filter, update);
-            return Json("Success", JsonRequestBehavior.AllowGet);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-
-        // GET: Deseos/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Deseos/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Deseos/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Deseos/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

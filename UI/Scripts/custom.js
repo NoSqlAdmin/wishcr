@@ -500,7 +500,8 @@ $(document).ready(function()
 		{
             var item = items[x];
             item.addEventListener('click', function (fn)
-			{
+            {
+                var deseo = document.getElementsByClassName('wishlist_count');
                 fn.target.classList.toggle('active');
                 var parameter = fn.target.children[0].value;
                 if (parameter !== "ninguno") {
@@ -515,8 +516,15 @@ $(document).ready(function()
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
-                            if (data == "Success") {
-
+                            var deseo = document.getElementsByClassName('wishlist_count')[0];
+                            var numero = parseInt(deseo.innerText);
+                            if (data == "Success++") {
+                                numero++;
+                                deseo.innerText = numero +"";
+                            }
+                            if (data == "Success--") {
+                                numero--;
+                                deseo.innerText = numero + "";
                             }
                         },
                         error: function () {
