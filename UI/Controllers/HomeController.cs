@@ -19,7 +19,11 @@ namespace UI.Controllers
             var productos = mc.Productos.AsQueryable().ToList();
             ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
             ViewBag.Productos = productos;
-            ViewBag.ProductosNuevos = (from p in productos where (p.Fecha_Ingreso.Date - DateTime.Now.Date).Days < 25 select p).ToList();
+            var nuevos = (from p in productos where (p.Fecha_Ingreso.Date - DateTime.Now.Date).Days < 25 select p).ToList();
+            ViewBag.ProductosNuevos = nuevos;
+            ViewBag.ProductosJuegos = (from p in nuevos where p.Categoria.Nombre.Equals("Video Juegos y Consolas") select p).OrderBy(p => p.Fecha_Ingreso).Take(16);
+            ViewBag.ProductosComputadoras = (from p in nuevos where p.Categoria.Nombre.Equals("Computadoras y Laptops") select p).OrderBy(p => p.Fecha_Ingreso).Take(16);
+            ViewBag.ProductosVideos = (from p in nuevos where p.Categoria.Nombre.Equals("TV y Audio") select p).OrderBy(p => p.Fecha_Ingreso).Take(16);
             ViewBag.ProductosValorados = productos.OrderBy(p => p.Valoracion.Valor).Take(16);
             var user = System.Web.HttpContext.Current.Session["userid"] = "113960817";
             if (user != null)
@@ -34,32 +38,32 @@ namespace UI.Controllers
             ViewBag.Message = "Your application description page.";
             MongoContext mc = new MongoContext();
             //ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
-            //MongoContext mc = new MongoContext();
-            //var Categorias = new List<Categoria> {
-            //    new Categoria { Descripcion = "Todo en camaras y accesorios de fotografia", Nombre = "Camaras" },
-            //    new Categoria { Descripcion = "Hardware para PC", Nombre = "Hardware" },
-            //    new Categoria { Descripcion = "Toda la gama de Celurales", Nombre = "Smartphones y Tablets" },
-            //    new Categoria { Descripcion = "Toda la gama de TV", Nombre = "TV y Audio" },
-            //    new Categoria { Descripcion = "Area de articulos para jugadores", Nombre = "Video Juegos y Consolas" },
-            //    new Categoria { Descripcion = "Accesorios de diversos tipos", Nombre = "Accessorios" }
-            //};
-            //Categorias.ForEach(c => mc.Categorias.InsertOne(c));
-            //Categoria categoria = (from c in mc.Categorias.AsQueryable<Categoria>() where c.Nombre == "Computadoras y Laptops" select c).First();
-            //Producto pro = new Producto
-            //{
-            //    Categoria = categoria,
-            //    Codigo = 454,
-            //    Descripcion = "Computadora marca Lenovo Core i7, 16 gigas ram, 1 Tera store",
-            //    Marca = "Lenovo",
-            //    Imagen_ID = new ObjectId(),
-            //    Nombre = "Lenovo Y780",
-            //    Precio = 450000,
-            //    Stock = new Stock { EnBodega = 100, EnVenta = 200},
-            //    Valoracion = new Valoracion { Total_Valoraciones = 1, Valor = 5}
-            //};
-            //mc.Productos.InsertOne(pro);
+                  //MongoContext mc = new MongoContext();
+                  //var Categorias = new List<Categoria> {
+                  //    new Categoria { Descripcion = "Todo en camaras y accesorios de fotografia", Nombre = "Camaras" },
+                  //    new Categoria { Descripcion = "Hardware para PC", Nombre = "Hardware" },
+                  //    new Categoria { Descripcion = "Toda la gama de Celurales", Nombre = "Smartphones y Tablets" },
+                  //    new Categoria { Descripcion = "Toda la gama de TV", Nombre = "TV y Audio" },
+                  //    new Categoria { Descripcion = "Area de articulos para jugadores", Nombre = "Video Juegos y Consolas" },
+                  //    new Categoria { Descripcion = "Accesorios de diversos tipos", Nombre = "Accessorios" }
+                  //};
+                  //Categorias.ForEach(c => mc.Categorias.InsertOne(c));
+                  //Categoria categoria = (from c in mc.Categorias.AsQueryable<Categoria>() where c.Nombre == "Computadoras y Laptops" select c).First();
+                  //Producto pro = new Producto
+                  //{
+                  //    Categoria = categoria,
+                  //    Codigo = 454,
+                  //    Descripcion = "Computadora marca Lenovo Core i7, 16 gigas ram, 1 Tera store",
+                  //    Marca = "Lenovo",
+                  //    Imagen_ID = new ObjectId(),
+                  //    Nombre = "Lenovo Y780",
+                  //    Precio = 450000,
+                  //    Stock = new Stock { EnBodega = 100, EnVenta = 200},
+                  //    Valoracion = new Valoracion { Total_Valoraciones = 1, Valor = 5}
+                  //};
+                  //mc.Productos.InsertOne(pro);
 
-            Cliente cliente = new Cliente
+                  Cliente cliente = new Cliente
             {
                 Cedula = "113960817",
                 Contrasena = "contraseña",
