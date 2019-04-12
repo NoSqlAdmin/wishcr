@@ -84,13 +84,13 @@
                             <div class="top_bar_user">
                                 @if (ViewBag.Cliente != null)
                                 {
-                                    <div><a href="#">Cerrar Sessión</a></div>
+                                    <div><a href="/Auth/SessionDown">Cerrar Sessión</a></div>
                                 }
                                 else
                                 {
                                     <div class="user_icon"></div>
-                                    <div><a href="#">Registrarse</a></div>
-                                    <div><a href="#">Ingresar</a></div>
+                                    <div><a href="/Auth/Register">Registrarse</a></div>
+                                    <div><a href="/Auth/Login">Ingresar</a></div>
                                 }
                             </div>
                         </div>

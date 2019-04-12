@@ -9,14 +9,21 @@ namespace UI.Controllers
 {
     public class Store
     {
+        
         private static Store _default;
+
+        private Store()
+        {
+            Carrito = new List<Detalle>();
+        }
+
         public static Store Default => _default ?? (_default = new Store());
 
         public Cliente Cliente
         {
             get
             {
-                var user = HttpContext.Current.Session["userid"] = "113960817";
+                var user = HttpContext.Current.Session["userid"];
                 if (user != null)
                 {
                     MongoContext mc = new MongoContext();
@@ -26,5 +33,7 @@ namespace UI.Controllers
                     return null;
             }
         }
+
+        public List<Detalle> Carrito { get; set; }
     }
 }
