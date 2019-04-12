@@ -19,10 +19,33 @@ namespace UI.Controllers
             return View(Store.Default.Carrito);
         }
 
-        // GET: Carrito/Details/5
-        public ActionResult Details(int id)
+        // GET: Carrito/Comprar
+        public ActionResult Comprar()
         {
-            return View();
+            Random rnd = new Random();
+            var valor = rnd.Next(1000,10000);
+            Factura factura = new Factura(Convert.ToInt64("1120000204"+valor),Store.Default.Carrito,Store.Default.Cliente);
+            Store.Default.FacturaTemp = factura;
+            return View(factura);
+        }
+
+        [HttpPost]
+        // POST: Carrito/Facturar
+        public ActionResult Facturar()
+        {
+            MongoContext mc = new MongoContext();
+            Factura factura = Store.Default.FacturaTemp;
+            factura.Detalles.ToList().ForEach(f => {
+                var filter = Builders<Producto>.Filter.Eq("_id",ObjectId.Parse(f.Producto.Id));
+                var stock = f.Producto.Stock;
+                stock.EnVenta -= f.Cantidad;
+                var update = Builders<Producto>.Update.Set(p => p.Stock, stock);
+                mc.Productos.FindOneAndUpdate(filter, update);
+            });
+            mc.Facturas.InsertOne(factura);
+            Store.Default.FacturaTemp = null;
+            Store.Default.Carrito = new List<Detalle>();
+            return RedirectToAction("Index","Home");
         }
 
         // POST: Carrito/Create
@@ -51,29 +74,7 @@ namespace UI.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-        // GET: Carrito/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Carrito/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+        
         // GET: Carrito/Delete/5
         public ActionResult Delete(int id)
         {

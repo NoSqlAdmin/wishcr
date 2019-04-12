@@ -35,5 +35,6 @@ namespace UI.Controllers
         }
 
         public List<Detalle> Carrito { get; set; }
+        public Factura FacturaTemp { get; set; }
     }
 }
