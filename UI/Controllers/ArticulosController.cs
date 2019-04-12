@@ -1,89 +1,36 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using UI.Models;
 
 namespace UI.Controllers
 {
     public class ArticulosController : Controller
     {
         // GET: Articulos
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            MongoContext mc = new MongoContext();
+            var productos = await mc.Productos.Find(p => true).ToListAsync();
+            ViewBag.Categorias = await mc.Categorias.Find(c => true).ToListAsync();
+            ViewBag.Cliente = Store.Default.Cliente;
+            return View(productos);
         }
 
         // GET: Articulos/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(string id)
         {
-            return View();
+            MongoContext mc = new MongoContext();
+            ViewBag.Categoria = await mc.Categorias.Find(c => c.Id.Equals(id)).FirstAsync();
+            var productos = await mc.Productos.Find(p => p.Categoria.Id.Equals(id)).ToListAsync();
+            ViewBag.Cliente = Store.Default.Cliente;
+            return View(productos);
         }
-
-        // GET: Articulos/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Articulos/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Articulos/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Articulos/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Articulos/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Articulos/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

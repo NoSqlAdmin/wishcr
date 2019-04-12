@@ -403,6 +403,7 @@
     <Content Include="Views\Articulos\Index.cshtml" />
     <Content Include="Views\Carrito\Index.cshtml" />
     <Content Include="Views\Shared\_Layout_Usuario.cshtml" />
+    <Content Include="Views\Articulos\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

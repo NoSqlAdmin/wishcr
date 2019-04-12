@@ -37,7 +37,7 @@ $(document).ready(function()
 	initViewedSlider();
 	initBrandsSlider();
 	initIsotope();
-	initPriceSlider();
+	//initPriceSlider();
 	initFavs();
 
 	$(window).on('resize', function()
@@ -409,11 +409,40 @@ $(document).ready(function()
 		var items = document.getElementsByClassName('product_fav');
 		for(var x = 0; x < items.length; x++)
 		{
-			var item = items[x];
-			item.addEventListener('click', function(fn)
-			{
-				fn.target.classList.toggle('active');
-			});
+            var item = items[x];
+            item.addEventListener('click', function (fn) {
+                var deseo = document.getElementsByClassName('wishlist_count');
+                fn.target.classList.toggle('active');
+                var parameter = fn.target.children[0].value;
+                if (parameter !== "ninguno") {
+                    var parameterValue1 = parameter.split(" ")[0];
+                    var parameterValue2 = parameter.split(" ")[1];
+                    var path = "/Deseos/Create";
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: path,
+                        data: '{"producto": "' + parameterValue1 + '", "cedula" : "' + parameterValue2 + '" }',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            var deseo = document.getElementsByClassName('wishlist_count')[0];
+                            var numero = parseInt(deseo.innerText);
+                            if (data == "Success++") {
+                                numero++;
+                                deseo.innerText = numero + "";
+                            }
+                            if (data == "Success--") {
+                                numero--;
+                                deseo.innerText = numero + "";
+                            }
+                        },
+                        error: function () {
+                            alert(data);
+                        }
+                    });
+                }
+            });
 		}
 	}
 });

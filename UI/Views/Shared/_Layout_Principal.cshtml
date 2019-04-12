@@ -21,7 +21,7 @@
     @{
         string rutaCategoria(string categoria)
         {
-            return "/Home/About";
+            return "/Articulos/Details/" + categoria;
         }
         ViewBag.Cliente = Store.Default.Cliente;
         MongoContext mc = new MongoContext();
@@ -55,8 +55,8 @@
                                             <a href="#"><img src="~/images/user.svg" alt="" class="user_icon" />Usuario<i class="fa fa-chevron-down"></i></a>
                                             <ul>
                                                 <li><a href="#">Facturas</a></li>
-                                                <li><a href="#">Carrito</a></li>
-                                                <li><a href="#">Deseos</a></li>
+                                                <li><a href="/Carrito/Index">Carrito</a></li>
+                                                <li><a href="/Deseos/Index">Deseos</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -107,7 +107,7 @@
                                                 <ul class="custom_list clc">
                                                     @foreach (var c in ViewBag.Categorias)
                                                     {
-                                                        <li><a class="clc" href="@rutaCategoria(c.Nombre)">@c.Nombre</a></li>
+                                                        <li><a class="clc" href="@rutaCategoria(c.Id)">@c.Nombre</a></li>
                                                     }
                                                 </ul>
                                             </div>
@@ -169,7 +169,7 @@
                                 <ul class="cat_menu">
                                     @foreach (var c in ((List<Categoria>)ViewBag.Categorias).Take(10))
                                     {
-                                        <li><a href="@rutaCategoria(c.Nombre)">@c.Nombre<i class="fa fa-chevron-right ml-auto"></i></a></li>
+                                        <li><a href="@rutaCategoria(c.Id)">@c.Nombre<i class="fa fa-chevron-right ml-auto"></i></a></li>
                                     }
                                 </ul>
                             </div>
@@ -183,11 +183,11 @@
                                         <a href="#">Paginas<i class="fa fa-chevron-down"></i></a>
                                         <ul>
                                             <li><a href="shop.html">Shop<i class="fa fa-chevron-down"></i></a></li>
-                                            <li><a href="product.html">Product<i class="fa fa-chevron-down"></i></a></li>
+                                            <li><a href="/Articulos/Index">Productos<i class="fa fa-chevron-down"></i></a></li>
                                             <li><a href="blog.html">Blog<i class="fa fa-chevron-down"></i></a></li>
                                             <li><a href="blog_single.html">Blog Post<i class="fa fa-chevron-down"></i></a></li>
-                                            <li><a href="regular.html">Regular Post<i class="fa fa-chevron-down"></i></a></li>
-                                            <li><a href="cart.html">Cart<i class="fa fa-chevron-down"></i></a></li>
+                                            <li><a href="/Deseos/Index">Deseos<i class="fa fa-chevron-down"></i></a></li>
+                                            <li><a href="/Carrito/Index">Carrito<i class="fa fa-chevron-down"></i></a></li>
                                             <li><a href="/Home/Contact">Contacto<i class="fa fa-chevron-down"></i></a></li>
                                         </ul>
                                     </li>
