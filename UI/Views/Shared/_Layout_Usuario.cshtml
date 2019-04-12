@@ -106,8 +106,9 @@
                         <div class="header_search">
                             <div class="header_search_content">
                                 <div class="header_search_form_container">
-                                    <form action="/Home/Contact" class="header_search_form clearfix">
-                                        <input type="search" required="required" class="header_search_input" placeholder="Buscar Productos...">
+                                    <form action="/Articulos/Details" class="header_search_form clearfix" method="post">
+                                        <input type="search" required="required" class="header_search_input" name="nombre" placeholder="Buscar Productos...">
+                                        <input type="hidden" required="required" name="categoria" value="Todas" id="cat_busqueda">
                                         <div class="custom_dropdown">
                                             <div class="custom_dropdown_list">
                                                 <span class="custom_dropdown_placeholder clc">Todas las Categorias</span>
@@ -115,7 +116,7 @@
                                                 <ul class="custom_list clc">
                                                     @foreach (var c in ViewBag.Categorias)
                                                     {
-                                                        <li><a class="clc" href="@rutaCategoria(c.Nombre)">@c.Nombre</a></li>
+                                                        <li><a class="clc" id="@c.Id" href="#">@c.Nombre</a></li>
                                                     }
                                                 </ul>
                                             </div>

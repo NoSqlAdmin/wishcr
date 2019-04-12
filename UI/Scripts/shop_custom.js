@@ -122,6 +122,8 @@ $(document).ready(function()
 
 			placeholder.text( $(this).text() ).css('opacity', '1');
 
+            $('#cat_busqueda').val($(this).attr("id"));
+
 			if(list.hasClass('active'))
 			{
 				list.removeClass('active');

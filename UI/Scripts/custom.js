@@ -144,7 +144,9 @@ $(document).ready(function()
 			ev.preventDefault();
 			var index = $(this).parent().index();
 
-			placeholder.text( $(this).text() ).css('opacity', '1');
+            placeholder.text($(this).text()).css('opacity', '1');
+
+            $('#cat_busqueda').val($(this).attr("id"));
 
 			if(list.hasClass('active'))
 			{
