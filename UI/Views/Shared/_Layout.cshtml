@@ -4,7 +4,7 @@
 @using MongoDB.Driver;
 
 <!DOCTYPE html>
-<html>
+<html class="h-100">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
     @Styles.Render("~/Content/responsive.css")
     @RenderSection("styles", required: false)
 </head>
-<body>
+<body class="d-flex flex-column h-100">
     @{
         string rutaCategoria(string categoria)
         {
@@ -93,83 +93,83 @@
         <div class="container">
             @RenderBody()
         </div>
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="footer mt-auto">
         <hr />
-        <!-- Footer -->
+        <div class="container">
+            <div class="row">
 
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-3 footer_col">
-                        <div class="footer_column footer_contact">
-                            <div class="logo_container">
-                                <div class="logo"><a href="#">WishCR</a></div>
-                            </div>
-                            <div class="footer_title">Alguna consulta llamanos 24/7</div>
-                            <div class="footer_phone">+506 2205 3570</div>
-                            <div class="footer_contact_text">
-                                <p>San Pedro Centro</p>
-                                <p>San José - Costa Rica</p>
-                            </div>
-                            <div class="footer_social">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google"></i></a></li>
-                                </ul>
-                            </div>
+                <div class="col-lg-3 footer_col">
+                    <div class="footer_column footer_contact">
+                        <div class="logo_container">
+                            <div class="logo"><a href="#">WishCR</a></div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-2 offset-lg-2">
-                        <div class="footer_column">
-                            <div class="footer_title">Encuentra rapido</div>
-                            <ul class="footer_list">
-                                <li><a href="#">Computadoras y Laptops</a></li>
-                                <li><a href="#">Camaras</a></li>
-                                <li><a href="#">Hardware</a></li>
-                                <li><a href="#">Smartphones y Tablets</a></li>
-                                <li><a href="#">TV y Audio</a></li>
-                            </ul>
-                            <div class="footer_subtitle">Accesorios</div>
-                            <ul class="footer_list">
-                                <li><a href="#">Electronicos</a></li>
+                        <div class="footer_title">Alguna consulta llamanos 24/7</div>
+                        <div class="footer_phone">+506 2205 3570</div>
+                        <div class="footer_contact_text">
+                            <p>San Pedro Centro</p>
+                            <p>San José - Costa Rica</p>
+                        </div>
+                        <div class="footer_social">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google"></i></a></li>
                             </ul>
                         </div>
                     </div>
-
-                    <div class="col-lg-2">
-                        <div class="footer_column">
-                            <ul class="footer_list footer_list_2">
-                                <li><a href="#">Video Juegos y Consolas</a></li>
-                                <li><a href="#">Accesorios</a></li>
-                                <li><a href="#">Camaras</a></li>
-                                <li><a href="#">Hardware</a></li>
-                                <li><a href="#">Computadoras y Laptops</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2">
-                        <div class="footer_column">
-                            <div class="footer_title">Ayuda al Cliente</div>
-                            <ul class="footer_list">
-                                <li><a href="#">Mi Cuenta</a></li>
-                                <li><a href="#">Ordenes</a></li>
-                                <li><a href="#">Wish Lista</a></li>
-                                <li><a href="#">Servicio al Consumidor</a></li>
-                                <li><a href="#">Cambios</a></li>
-                                <li><a href="#">FAQs</a></li>
-                                <li><a href="#">Soporte Productos</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-        </footer>
 
+                <div class="col-lg-2 offset-lg-2">
+                    <div class="footer_column">
+                        <div class="footer_title">Encuentra rapido</div>
+                        <ul class="footer_list">
+                            <li><a href="#">Computadoras y Laptops</a></li>
+                            <li><a href="#">Camaras</a></li>
+                            <li><a href="#">Hardware</a></li>
+                            <li><a href="#">Smartphones y Tablets</a></li>
+                            <li><a href="#">TV y Audio</a></li>
+                        </ul>
+                        <div class="footer_subtitle">Accesorios</div>
+                        <ul class="footer_list">
+                            <li><a href="#">Electronicos</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="footer_column">
+                        <ul class="footer_list footer_list_2">
+                            <li><a href="#">Video Juegos y Consolas</a></li>
+                            <li><a href="#">Accesorios</a></li>
+                            <li><a href="#">Camaras</a></li>
+                            <li><a href="#">Hardware</a></li>
+                            <li><a href="#">Computadoras y Laptops</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="footer_column">
+                        <div class="footer_title">Ayuda al Cliente</div>
+                        <ul class="footer_list">
+                            <li><a href="#">Mi Cuenta</a></li>
+                            <li><a href="#">Ordenes</a></li>
+                            <li><a href="#">Wish Lista</a></li>
+                            <li><a href="#">Servicio al Consumidor</a></li>
+                            <li><a href="#">Cambios</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Soporte Productos</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         <!-- Copyright -->
 
         <div class="copyright">
@@ -197,8 +197,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryval")

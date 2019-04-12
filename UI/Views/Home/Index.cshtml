@@ -224,7 +224,10 @@
                                                         <input type="radio" name="product_color" style="background:#000000">
                                                         <input type="radio" name="product_color" style="background:#999999">
                                                     </div>
-                                                    <button class="product_cart_button">Agregar al Carrito</button>
+                                                    @if (ViewBag.Cliente != null)
+                                                    {
+                                                        <button class="product_cart_button active" id="@p.Id.ToString()" onclick="Comprar(event)">Agregar al Carrito</button>
+                                                    }
                                                 </div>
                                             </div>
                                             @{
@@ -288,7 +291,10 @@
                                                         <input type="radio" name="product_color" style="background:#000000">
                                                         <input type="radio" name="product_color" style="background:#999999">
                                                     </div>
-                                                    <button class="product_cart_button">Agregar al Carrito</button>
+                                                    @if (ViewBag.Cliente != null)
+                                                    {
+                                                        <button class="product_cart_button active" id="@p.Id.ToString()" onclick="Comprar(event)">Agregar al Carrito</button>
+                                                    }
                                                 </div>
                                             </div>
                                             @{
@@ -585,7 +591,10 @@
                                                             <input type="radio" name="product_color" style="background:#000000">
                                                             <input type="radio" name="product_color" style="background:#999999">
                                                         </div>
-                                                        <button class="product_cart_button">Agregar al Carrito</button>
+                                                        @if (ViewBag.Cliente != null)
+                                                        {
+                                                            <button class="product_cart_button active" id="@p.Id.ToString()" onclick="Comprar(event)">Agregar al Carrito</button>
+                                                        }
                                                     </div>
                                                 </div>
                                                 @{
@@ -636,7 +645,10 @@
                                                             <input type="radio" name="product_color" style="background:#000000">
                                                             <input type="radio" name="product_color" style="background:#999999">
                                                         </div>
-                                                        <button class="product_cart_button">Agregar al Carrito</button>
+                                                        @if (ViewBag.Cliente != null)
+                                                        {
+                                                            <button class="product_cart_button active" id="@p.Id.ToString()" onclick="Comprar(event)">Agregar al Carrito</button>
+                                                        }
                                                     </div>
                                                 </div>
                                                 @{
@@ -687,7 +699,10 @@
                                                             <input type="radio" name="product_color" style="background:#000000">
                                                             <input type="radio" name="product_color" style="background:#999999">
                                                         </div>
-                                                        <button class="product_cart_button">Agregar al Carrito</button>
+                                                        @if (ViewBag.Cliente != null)
+                                                        {
+                                                            <button class="product_cart_button active" id="@p.Id.ToString()" onclick="Comprar(event)">Agregar al Carrito</button>
+                                                        }
                                                     </div>
                                                 </div>
                                                 @{

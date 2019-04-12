@@ -78,7 +78,7 @@ namespace UI.Controllers
         public ActionResult Delete(int id)
         {
             Store.Default.Carrito.RemoveAt(id);
-            return View("Index");
+            return View("Index", Store.Default.Carrito);
         }
         
     }

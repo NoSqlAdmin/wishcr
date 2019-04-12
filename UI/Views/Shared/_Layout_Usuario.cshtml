@@ -4,7 +4,7 @@
 @using MongoDB.Driver;
 
 <!DOCTYPE html>
-<html>
+<html class="h-100">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
     @Styles.Render("~/Content/responsive.css")
     @RenderSection("styles", required: false)
 </head>
-<body>
+<body class="d-flex flex-column h-100">
     @{
         string rutaCategoria(string categoria)
         {
@@ -48,9 +48,17 @@
                         <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/images/mail.png" alt=""></div><a href="wishcr@gmail.com">wishcr@gmail.com</a></div>
                         <div class="top_bar_content ml-auto">
                             <div class="top_bar_menu">
-                                @if (ViewBag.Cliente != null)
-                                {
-                                    <ul class="standard_dropdown top_bar_dropdown">
+                                <ul class="standard_dropdown top_bar_dropdown">
+                                    <li>
+                                        <a href="/">Home<i class="fa fa-chevron-down"></i></a>
+                                        <ul>
+                                            <li><a href="#">Productos</a></li>
+                                            <li><a href="/Home/Contact">Contacto</a></li>
+                                            <li><a href="/Home/About">Acerca de</a></li>
+                                        </ul>
+                                    </li>
+                                    @if (ViewBag.Cliente != null)
+                                    {
                                         <li>
                                             <a href="#"><img src="~/images/user.svg" alt="" class="user_icon" />Usuario<i class="fa fa-chevron-down"></i></a>
                                             <ul>
@@ -59,8 +67,8 @@
                                                 <li><a href="#">Deseos</a></li>
                                             </ul>
                                         </li>
-                                    </ul>
-                                }
+                                    }
+                                </ul>
                             </div>
                             <div class="top_bar_user">
                                 @if (ViewBag.Cliente != null)
@@ -148,97 +156,18 @@
                 </div>
             </div>
         </div>
-
-        <!-- Main Navigation -->
-
-        <nav class="main_nav">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-
-                        <div class="main_nav_content d-flex flex-row">
-
-                            <!-- Categories Menu -->
-
-                            <div class="cat_menu_container">
-                                <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
-                                    <div class="cat_burger"><span></span><span></span><span></span></div>
-                                    <div class="cat_menu_text">categorias</div>
-                                </div>
-
-                                <ul class="cat_menu">
-                                    @foreach (var c in ((List<Categoria>)ViewBag.Categorias).Take(10))
-                                    {
-                                        <li><a href="@rutaCategoria(c.Nombre)">@c.Nombre<i class="fa fa-chevron-right ml-auto"></i></a></li>
-                                    }
-                                </ul>
-                            </div>
-
-                            <!-- Main Nav Menu -->
-
-                            <div class="main_nav_menu ml-auto">
-                                <ul class="standard_dropdown main_nav_dropdown">
-                                    <li><a href="#">Home<i class="fa fa-chevron-down"></i></a></li>
-                                    <li class="hassubs">
-                                        <a href="#">Paginas<i class="fa fa-chevron-down"></i></a>
-                                        <ul>
-                                            <li><a href="shop.html">Shop<i class="fa fa-chevron-down"></i></a></li>
-                                            <li><a href="product.html">Product<i class="fa fa-chevron-down"></i></a></li>
-                                            <li><a href="blog.html">Blog<i class="fa fa-chevron-down"></i></a></li>
-                                            <li><a href="blog_single.html">Blog Post<i class="fa fa-chevron-down"></i></a></li>
-                                            <li><a href="regular.html">Regular Post<i class="fa fa-chevron-down"></i></a></li>
-                                            <li><a href="cart.html">Cart<i class="fa fa-chevron-down"></i></a></li>
-                                            <li><a href="/Home/Contact">Contacto<i class="fa fa-chevron-down"></i></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="/Home/Contact">Contacto<i class="fa fa-chevron-down"></i></a></li>
-                                </ul>
-                            </div>
-
-                            <!-- Menu Trigger -->
-
-                            <div class="menu_trigger_container ml-auto">
-                                <div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
-                                    <div class="menu_burger">
-                                        <div class="menu_trigger_text">menu</div>
-                                        <div class="cat_burger menu_burger_inner"><span></span><span></span><span></span></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
     </header>
 
-    <!-- Banner -->
-
-    <div class="banner">
-        <div class="banner_background" style="background-image:url(images/banner_background.jpg)"></div>
-        <div class="container fill_height">
-            <div class="row fill_height">
-                <div class="banner_product_image"><img src="~/images/banner_product.png" alt=""></div>
-                <div class="col-lg-5 offset-lg-4 fill_height">
-                    <div class="banner_content">
-                        <h1 class="banner_text">Nueva era de smartphones</h1>
-                        <div class="banner_price"><span>$530</span>$460</div>
-                        <div class="banner_product_name">Apple Iphone 11</div>
-                        <div class="button banner_button"><a href="#">Comprar Ahora</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div>
-        @RenderBody()
+        <div class="container">
+            @RenderBody()
+        </div>
     </div>
 
     <!-- Footer -->
 
-    <footer class="footer">
+    <footer class="footer mt-auto">
         <hr />
         <div class="container">
             <div class="row">
@@ -339,7 +268,6 @@
             </div>
         </div>
     </footer>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryval")

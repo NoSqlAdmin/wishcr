@@ -402,6 +402,7 @@
     <Content Include="Views\Shared\_Layout_Principal.cshtml" />
     <Content Include="Views\Articulos\Index.cshtml" />
     <Content Include="Views\Carrito\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout_Usuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
