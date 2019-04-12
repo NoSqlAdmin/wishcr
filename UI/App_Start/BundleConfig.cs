@@ -38,6 +38,9 @@ namespace UI
             bundles.Add(new ScriptBundle("~/bundles/slick").Include(
                       "~/Scripts/slick.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/compras").Include(
+                      "~/Scripts/compras.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/easing").Include(
                       "~/Scripts/easing.js"));
 

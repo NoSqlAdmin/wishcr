@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,11 +30,12 @@ namespace UI.Controllers
         public async Task<JsonResult> Create(string producto_id)
         {
             if (producto_id.Equals("ninguno")) return Json("Error", JsonRequestBehavior.AllowGet);
-            
+            String result = "";
             if (Store.Default.Carrito.Exists(d => d.Producto.Id.Equals(producto_id)))
             {
                 Store.Default.Carrito.Find(d => d.Producto.Id.Equals(producto_id)).Cantidad++;
-                return Json("Success", JsonRequestBehavior.AllowGet);
+                var total = Store.Default.Carrito.Sum(d => d.Subtotal);
+                result = "{ \"Estado\" : \"Success\", \"Total\" : \"" + total + "\" }";
             }
             else
             {
@@ -44,8 +46,10 @@ namespace UI.Controllers
                     Cantidad = 1,
                     Producto = producto
                 });
-                return Json("Success++", JsonRequestBehavior.AllowGet);
+                var total = Store.Default.Carrito.Sum(d => d.Subtotal);
+                result = "{ \"Estado\" : \"Success++\", \"Total\" : \""+total+"\" }"; 
             }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Carrito/Edit/5
