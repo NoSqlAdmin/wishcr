@@ -736,21 +736,48 @@
                             </div>
 
                         </div>
-
+                        @{ var pro = ((List<Producto>)ViewBag.ProductosComputadoras).First();}
                         <div class="col-lg-3">
                             <div class="arrivals_single clearfix">
                                 <div class="d-flex flex-column align-items-center justify-content-center">
-                                    <div class="arrivals_single_image"><img src="~/images/new_single.png" alt=""></div>
+                                    <div class="arrivals_single_image"><img src="@Href(Gridfs.Default.GetImagePath(pro.Imagen))" alt=""></div>
                                     <div class="arrivals_single_content">
-                                        <div class="arrivals_single_category"><a href="#">Smartphones</a></div>
+                                        <div class="arrivals_single_category"><a href="#">@pro.Marca</a></div>
                                         <div class="arrivals_single_name_container clearfix">
-                                            <div class="arrivals_single_name"><a href="#">LUNA Smartphone</a></div>
-                                            <div class="arrivals_single_price text-right">₡379</div>
+                                            <div class="arrivals_single_name"><a href="#">@pro.Nombre</a></div>
+                                            <div class="arrivals_single_price text-right">₡ @pro.Precio</div>
                                         </div>
-                                        <div class="rating_r rating_r_4 arrivals_single_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                        <form action="#"><button class="arrivals_single_button">Agregar al Carrito</button></form>
+                                        @{var clas = "rating_r_" + (int)pro.Valoracion.Valor; }
+                                        <div class="rating_r @clas arrivals_single_rating">
+                                            @for (int i = 0; i < (int)@pro.Valoracion.Valor; i++)
+                                            {
+                                                <i></i>
+                                            }
+                                        </div>
+                                        <!--<div class="rating_r rating_r_4 arrivals_single_rating"><i></i><i></i><i></i><i></i><i></i></div>-->
+                                        @if (ViewBag.Cliente != null)
+                                        {
+                                            <button class="arrivals_single_button" id="@pro.Id.ToString()" onclick="Comprar(event)">Agregar al Carrito</button>
+                                        }
                                     </div>
-                                    <div class="arrivals_single_fav product_fav active"><i class="fa fa-heart"></i></div>
+                                    @{
+                                        string parameter = (pro.Id.ToString() + " " + ((ViewBag.Cliente == null) ? "ninguno" : ViewBag.Cliente.Cedula.ToString()));
+                                        if (ViewBag.Cliente != null)
+                                        {
+                                            if (((List<Producto>)ViewBag.Cliente.Deseos).ToList().Exists(d => d.Id.Equals(pro.Id.ToString())))
+                                            {
+                                                <div class="product_fav active"><input type="hidden" value="@parameter" /><i class="fa fa-heart"></i></div>
+                                            }
+                                            else
+                                            {
+                                                <div class="product_fav"><input type="hidden" value="@parameter" /><i class="fa fa-heart"></i></div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="product_fav"><input type="hidden" value="ninguno" /><i class="fa fa-heart"></i></div>
+                                        }
+                                    }
                                     <ul class="arrivals_single_marks product_marks">
                                         <li class="arrivals_single_mark product_mark product_new">new</li>
                                     </ul>
