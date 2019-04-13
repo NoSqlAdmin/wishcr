@@ -13,16 +13,15 @@ namespace UI.Controllers
     public class DeseosController : Controller
     {
         // GET: Deseos
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
-            return View();
+            if (Store.Default.Cliente == null) return RedirectToAction("Index", "Home");
+            var cliente = Store.Default.Cliente;
+            var deseos = Store.Default.Cliente.Deseos.ToList();
+            ViewBag.Cliente = Store.Default.Cliente;
+            return View(deseos);
         }
-
-        // GET: Deseos/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        
 
         [HttpPost]
         // GET: Deseos/Create
@@ -45,6 +44,16 @@ namespace UI.Controllers
             var result = await mc.Clientes.FindOneAndUpdateAsync(filter, update);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        
+
+        //GET: Deseos/Delete
+        public async Task<ActionResult> Adquirir(int id)
+        {
+            var deseos = Store.Default.Cliente.Deseos.ToList();
+            var deseo = deseos.ElementAt(id);
+            await Create(deseo.Id, Store.Default.Cliente.Cedula);
+            CarritoController cc = new CarritoController();
+            await cc.Create(deseo.Id);
+            return RedirectToAction("Index");
+        }
     }
 }

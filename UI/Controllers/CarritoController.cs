@@ -16,6 +16,7 @@ namespace UI.Controllers
         // GET: Carrito
         public ActionResult Index()
         {
+            if (Store.Default.Cliente == null) return RedirectToAction("Index", "Home");
             return View(Store.Default.Carrito);
         }
 
