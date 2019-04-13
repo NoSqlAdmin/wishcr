@@ -45,7 +45,7 @@ namespace UI.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        //GET: Deseos/Delete
+        //GET: Deseos/Adquirir
         public async Task<ActionResult> Adquirir(int id)
         {
             var deseos = Store.Default.Cliente.Deseos.ToList();

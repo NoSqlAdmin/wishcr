@@ -30,6 +30,7 @@ namespace UI.Models
         [Required]
         public Producto Producto { get; set; }
 
-        public Double Subtotal { get {return  (Producto.Precio* Cantidad); } set {Subtotal = value;} }
+        private Double _subtotal;
+        public Double Subtotal { get {return (Producto.Precio * Cantidad); } set { _subtotal = value;} }
 }
 }

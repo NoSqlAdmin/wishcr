@@ -44,9 +44,12 @@ namespace UI.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public String Id { get; set; }
-        public String Empresa { get { return "WishCR"; } set { Empresa = value; } }
+
+        private String _empresa;
+        public String Empresa { get { return "WishCR"; } set { _empresa = value; } }
+        private String _cedula_juridica;
         [DisplayName("Cedula Juridica")]
-        public String Cedula_Juridica { get { return "3-101-013528"; } set { Cedula_Juridica = value; } }
+        public String Cedula_Juridica { get { return "3-101-013528"; } set { _cedula_juridica = value; } }
         [Required]
         [DisplayName("Numero de Factura")]
         public long Numero_Factura { get; set; }
@@ -55,9 +58,12 @@ namespace UI.Models
         public Cliente Cliente { get; set; }
         [Required]
         public IEnumerable<Detalle> Detalles { get; set; }
-        public Double Subtotal { get { return Detalles.Sum(d => d.Subtotal); }  set { Subtotal = value; } }
-        public Int32 IVA { get { return 13; } set { IVA = value; } }
-        public Double Total { get { return (((Subtotal / 100) * IVA) + Subtotal); }  set { Total = value; } }
+        private Double _subtotal;
+        public Double Subtotal { get { return Detalles.Sum(d => d.Subtotal); }  set { _subtotal = value; } }
+        private Int32 _iva;
+        public Int32 IVA { get { return 13; } set { _iva = value; } }
+        private Double _total;
+        public Double Total { get { return (((Subtotal / 100) * IVA) + Subtotal); }  set { _total = value; } }
 
     }
 }
