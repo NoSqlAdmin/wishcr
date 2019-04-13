@@ -22,7 +22,7 @@ namespace UI.Controllers
             var nuevos = (from p in productos where (p.Fecha_Ingreso.Date - DateTime.Now.Date).Days < 25 select p).ToList();
             ViewBag.ProductosNuevos = nuevos;
             ViewBag.ProductosJuegos = (from p in nuevos where p.Categoria.Nombre.Equals("Video Juegos y Consolas") select p).OrderBy(p => p.Fecha_Ingreso).Take(16);
-            ViewBag.ProductosComputadoras = (from p in nuevos where p.Categoria.Nombre.Equals("Computadoras y Laptops") select p).OrderBy(p => p.Fecha_Ingreso).Take(16);
+            ViewBag.ProductosComputadoras = (from p in nuevos where p.Categoria.Nombre.Equals("Computadoras y Laptops") select p).OrderBy(p => p.Fecha_Ingreso).Take(16).ToList();
             ViewBag.ProductosVideos = (from p in nuevos where p.Categoria.Nombre.Equals("TV y Audio") select p).OrderBy(p => p.Fecha_Ingreso).Take(16);
             ViewBag.ProductosValorados = productos.OrderBy(p => p.Valoracion.Valor).Take(16);
             ViewBag.Cliente = Store.Default.Cliente;
