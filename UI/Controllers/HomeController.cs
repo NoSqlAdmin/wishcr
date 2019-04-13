@@ -2,8 +2,10 @@
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using UI.Models;
 
@@ -13,6 +15,7 @@ namespace UI.Controllers
     {
         public ActionResult Index()
         {
+            //var id  = Gridfs.Default.SaveImage(HostingEnvironment.ApplicationPhysicalPath+ "/images/featured_7.png");
             MongoContext mc = new MongoContext();
             var productos = mc.Productos.AsQueryable().ToList();
             ViewBag.Productos = productos;

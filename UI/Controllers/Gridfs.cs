@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using MongoDB.Driver.GridFS;
 using static UI.Controllers.Gridfs;
 using MongoDB.Bson;
@@ -25,10 +26,9 @@ namespace UI.Controllers
             set { _id = ObjectId.Parse(value); }
         }
 
-        public String GetImagePaht(string id)
+        public String GetImagePath(string id)
         {
-            var path = HostingEnvironment.ApplicationPhysicalPath;
-            var fileName = path + "/images/" + id + ".png";
+            string fileName = Path.Combine(HttpContext.Current.Server.MapPath("~/images"), id+".png");
             if (!File.Exists(fileName))
             {
                 MongoContext mc = new MongoContext();
