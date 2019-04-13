@@ -52,7 +52,7 @@
                                 {
                                     <ul class="standard_dropdown top_bar_dropdown">
                                         <li>
-                                            <a href="#"><img src="~/images/user.svg" alt="" class="user_icon" />Usuario<i class="fa fa-chevron-down"></i></a>
+                                            <a href="#"><img src="~/images/user.svg" alt="" class="user_icon" />@ViewBag.Cliente.Usuario<i class="fa fa-chevron-down"></i></a>
                                             <ul>
                                                 <li><a href="/Cliente/Facturas">Facturas</a></li>
                                                 <li><a href="/Carrito/Index">Carrito</a></li>
@@ -184,10 +184,14 @@
                                         <a href="#">Paginas<i class="fa fa-chevron-down"></i></a>
                                         <ul>
                                             <li><a href="/Articulos/Index">Tienda<i class="fa fa-chevron-down"></i></a></li>
-                                            <li><a href="/Cliente/Facturas">Facturas<i class="fa fa-chevron-down"></i></a></li>
-                                            <li><a href="/Deseos/Index">Deseos<i class="fa fa-chevron-down"></i></a></li>
-                                            <li><a href="/Carrito/Index">Carrito<i class="fa fa-chevron-down"></i></a></li>
                                             <li><a href="/Home/Contact">Contacto<i class="fa fa-chevron-down"></i></a></li>
+                                            <li><a href="/Home/About">Acerca de<i class="fa fa-chevron-down"></i></a></li>
+                                            @if (ViewBag.Cliente != null)
+                                            {
+                                                <li><a href="/Cliente/Facturas">Facturas<i class="fa fa-chevron-down"></i></a></li>
+                                                <li><a href="/Deseos/Index">Deseos<i class="fa fa-chevron-down"></i></a></li>
+                                                <li><a href="/Carrito/Index">Carrito<i class="fa fa-chevron-down"></i></a></li>
+                                            }
                                         </ul>
                                     </li>
                                     <li><a href="/Home/Contact">Contacto<i class="fa fa-chevron-down"></i></a></li>
@@ -222,9 +226,8 @@
                 <div class="col-lg-5 offset-lg-4 fill_height">
                     <div class="banner_content">
                         <h1 class="banner_text">Nueva era de smartphones</h1>
-                        <div class="banner_price"><span>$530</span>$460</div>
-                        <div class="banner_product_name">Apple Iphone 11</div>
-                        <div class="button banner_button"><a href="#">Comprar Ahora</a></div>
+                        <div class="banner_price"><span>₡1207410</span>₡1100000</div>
+                        <div class="banner_product_name">Apple Iphone XS</div>
                     </div>
                 </div>
             </div>
@@ -319,10 +322,10 @@
 
                         <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
                             <div class="copyright_content">
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                               
                                 Copyright &copy;
                                 <script>document.write(new Date().getFullYear());</script> All rights reserved | This page is made in Fidelitas University <i class="fa fa-heart" aria-hidden="true"></i>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        
                             </div>
                             <div class="logos ml-sm-auto">
                                 <ul class="logos_list">
