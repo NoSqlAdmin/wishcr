@@ -1,0 +1,282 @@
+﻿
+@using UI.Controllers;
+@using UI.Models;
+@using MongoDB.Driver;
+
+<!DOCTYPE html>
+<html class="h-100">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - WishCR</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/slickcss")
+    @Styles.Render("~/Content/OwlCarousel2css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/responsive.css")
+    @Styles.Render("~/Content/main_styles.css")
+    @RenderSection("styles", required: false)
+</head>
+<body class="d-flex flex-column h-100">
+    @{
+        string rutaCategoria(string categoria)
+        {
+            return "/Home/About";
+        }
+        ViewBag.Cliente = Store.Default.Cliente;
+        MongoContext mc = new MongoContext();
+        ViewBag.Categorias = mc.Categorias.AsQueryable().ToList();
+        if (ViewBag.Cliente != null)
+        {
+            ViewBag.DeseosCount = "" + ((Cliente)ViewBag.Cliente).Deseos.Count();
+        }
+        else
+        {
+            ViewBag.DeseosCount = "0";
+
+        }
+    }
+    <header class="header">
+
+        <!-- Top Bar -->
+
+        <div class="top_bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col d-flex flex-row">
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/images/phone.png" alt=""></div>+506 2205 3570</div>
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="~/images/mail.png" alt=""></div><a href="wishcr@gmail.com">wishcr@gmail.com</a></div>
+                        <div class="top_bar_content ml-auto">
+                            <div class="top_bar_menu">
+                                <ul class="standard_dropdown top_bar_dropdown">
+                                    <li>
+                                        <a href="/">Home<i class="fa fa-chevron-down"></i></a>
+                                        <ul>
+                                            <li><a href="/Articulos/Index">Tienda</a></li>
+                                            <li><a href="/Home/Contact">Contacto</a></li>
+                                            <li><a href="/Home/About">Acerca de</a></li>
+                                        </ul>
+                                    </li>
+                                    @if (ViewBag.Cliente != null)
+                                    {
+                                        <li>
+                                            <a href="#"><img src="~/images/user.svg" alt="" class="user_icon" />Usuario<i class="fa fa-chevron-down"></i></a>
+                                            <ul>
+                                                <li><a href="/Cliente/Facturas">Facturas</a></li>
+                                                <li><a href="/Carrito/Index">Carrito</a></li>
+                                                <li><a href="/Deseos/Index">Deseos</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="top_bar_user">
+                                @if (ViewBag.Cliente != null)
+                                {
+                                    <div><a href="/Auth/SessionDown">Cerrar Sessión</a></div>
+                                }
+                                else
+                                {
+                                    <div class="user_icon"></div>
+                                    <div><a href="/Auth/Register">Registrarse</a></div>
+                                    <div><a href="/Auth/Login">Ingresar</a></div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Main -->
+
+        <div class="header_main">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Logo -->
+                    <div class="col-lg-2 col-sm-3 col-3 order-1">
+                        <div class="logo_container">
+                            <div class="logo"><a href="/Home/Index">WishCR</a></div>
+                        </div>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+                        <div class="header_search">
+                            <div class="header_search_content">
+                                <div class="header_search_form_container">
+                                    <form action="/Articulos/Details" class="header_search_form clearfix" method="post">
+                                        <input type="search" required="required" class="header_search_input" name="nombre" placeholder="Buscar Productos...">
+                                        <input type="hidden" required="required" name="categoria" value="Todas" id="cat_busqueda">
+                                        <div class="custom_dropdown">
+                                            <div class="custom_dropdown_list">
+                                                <span class="custom_dropdown_placeholder clc">Todas las Categorias</span>
+                                                <i class="fa fa-chevron-down"></i>
+                                                <ul class="custom_list clc">
+                                                    @foreach (var c in ViewBag.Categorias)
+                                                    {
+                                                        <li><a class="clc" id="@c.Id" href="#">@c.Nombre</a></li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="~/images/search.png" alt=""></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist -->
+                    <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+                        <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+                            <div class="wishlist d-flex flex-row align-items-center justify-content-end">
+                                <div class="wishlist_icon"><img src="~/images/heart.png" alt=""></div>
+                                <div class="wishlist_content">
+                                    <div class="wishlist_text"><a href="/Deseos/Index">Deseos</a></div>
+                                    <div class="wishlist_count">@ViewBag.DeseosCount.ToString()</div>
+                                </div>
+                            </div>
+
+                            <!-- Cart -->
+                            <div class="cart">
+                                <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                    <div class="cart_icon">
+                                        <img src="~/images/cart.png" alt="">
+                                        <div class="cart_count"><span>@Store.Default.Carrito.Count()</span></div>
+                                    </div>
+                                    <div class="cart_content">
+                                        <div class="cart_text"><a href="/Carrito/Index">Carrito</a></div>
+                                        <div class="cart_price">₡ @Store.Default.Carrito.Sum(d => d.Subtotal)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="footer mt-auto">
+        <hr />
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 footer_col">
+                    <div class="footer_column footer_contact">
+                        <div class="logo_container">
+                            <div class="logo"><a href="#">WishCR</a></div>
+                        </div>
+                        <div class="footer_title">Alguna consulta llamanos 24/7</div>
+                        <div class="footer_phone">+506 2205 3570</div>
+                        <div class="footer_contact_text">
+                            <p>San Pedro Centro</p>
+                            <p>San José - Costa Rica</p>
+                        </div>
+                        <div class="footer_social">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 offset-lg-2">
+                    <div class="footer_column">
+                        <div class="footer_title">Encuentra rapido</div>
+                        <ul class="footer_list">
+                            <li><a href="#">Computadoras y Laptops</a></li>
+                            <li><a href="#">Camaras</a></li>
+                            <li><a href="#">Hardware</a></li>
+                            <li><a href="#">Smartphones y Tablets</a></li>
+                            <li><a href="#">TV y Audio</a></li>
+                        </ul>
+                        <div class="footer_subtitle">Accesorios</div>
+                        <ul class="footer_list">
+                            <li><a href="#">Electronicos</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="footer_column">
+                        <ul class="footer_list footer_list_2">
+                            <li><a href="#">Video Juegos y Consolas</a></li>
+                            <li><a href="#">Accesorios</a></li>
+                            <li><a href="#">Camaras</a></li>
+                            <li><a href="#">Hardware</a></li>
+                            <li><a href="#">Computadoras y Laptops</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="footer_column">
+                        <div class="footer_title">Ayuda al Cliente</div>
+                        <ul class="footer_list">
+                            <li><a href="#">Mi Cuenta</a></li>
+                            <li><a href="#">Ordenes</a></li>
+                            <li><a href="#">Wish Lista</a></li>
+                            <li><a href="#">Servicio al Consumidor</a></li>
+                            <li><a href="#">Cambios</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Soporte Productos</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Copyright -->
+
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
+                            <div class="copyright_content">
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This page is made in Fidelitas University <i class="fa fa-heart" aria-hidden="true"></i>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </div>
+                            <div class="logos ml-sm-auto">
+                                <ul class="logos_list">
+                                    <li><a href="#"><img src="~/images/logos_1.png" alt=""></a></li>
+                                    <li><a href="#"><img src="~/images/logos_2.png" alt=""></a></li>
+                                    <li><a href="#"><img src="~/images/logos_3.png" alt=""></a></li>
+                                    <li><a href="#"><img src="~/images/logos_4.png" alt=""></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/easing")
+    @Scripts.Render("~/bundles/scrollmagic")
+    @Scripts.Render("~/bundles/OwlCarousel2")
+    @Scripts.Render("~/bundles/slick")
+    @Scripts.Render("~/bundles/greensock")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
