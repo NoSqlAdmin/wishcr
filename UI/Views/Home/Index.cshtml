@@ -1,5 +1,6 @@
 ﻿@using Newtonsoft.Json;
 @using UI.Models;
+@using UI.Controllers;
 @{
     ViewBag.Title = "Home";
 }
@@ -24,7 +25,7 @@
                     <div class="char_icon"><img src="~/images/char_1.png" alt=""></div>
                     <div class="char_content">
                         <div class="char_title">Transporte</div>
-                        <div class="char_subtitle">Por $50</div>
+                        <div class="char_subtitle">Por ₡50</div>
                     </div>
                 </div>
             </div>
@@ -90,11 +91,11 @@
                                 <div class="deals_content">
                                     <div class="deals_info_line d-flex flex-row justify-content-start">
                                         <div class="deals_item_category"><a href="#">Headphones</a></div>
-                                        <div class="deals_item_price_a ml-auto">$300</div>
+                                        <div class="deals_item_price_a ml-auto">₡300</div>
                                     </div>
                                     <div class="deals_info_line d-flex flex-row justify-content-start">
                                         <div class="deals_item_name">Beoplay H7</div>
-                                        <div class="deals_item_price ml-auto">$225</div>
+                                        <div class="deals_item_price ml-auto">₡225</div>
                                     </div>
                                     <div class="available">
                                         <div class="available_line d-flex flex-row justify-content-start">
@@ -159,7 +160,7 @@
                                     <div class="featured_slider_item">
                                         <div class="border_active"></div>
                                         <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
-                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="~/images/featured_2.png" alt=""></div>
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="@Href(Gridfs.Default.GetImagePath(p.Imagen))" alt=""></div>
                                             <div class="product_content">
                                                 <div class="product_price">₡ @p.Precio</div>
                                                 <div class="product_name"><div><a href="product.html">@p.Nombre</a></div></div>
@@ -328,7 +329,7 @@
                                         <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="~/images/featured_1.png" alt=""></div>
                                             <div class="product_content">
-                                                <div class="product_price discount">$225<span>$300</span></div>
+                                                <div class="product_price discount">₡225<span>₡300</span></div>
                                                 <div class="product_name"><div><a href="product.html">Huawei MediaPad...</a></div></div>
                                                 <div class="product_extras">
                                                     <div class="product_color">
@@ -353,7 +354,7 @@
                                         <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="~/images/featured_2.png" alt=""></div>
                                             <div class="product_content">
-                                                <div class="product_price">$379</div>
+                                                <div class="product_price">₡379</div>
                                                 <div class="product_name"><div><a href="product.html">Apple iPod shuffle</a></div></div>
                                                 <div class="product_extras">
                                                     <div class="product_color">
@@ -378,7 +379,7 @@
                                         <div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="~/images/featured_3.png" alt=""></div>
                                             <div class="product_content">
-                                                <div class="product_price">$379</div>
+                                                <div class="product_price">₡379</div>
                                                 <div class="product_name"><div><a href="product.html">Sony MDRZX310W</a></div></div>
                                                 <div class="product_extras">
                                                     <div class="product_color">
@@ -418,7 +419,7 @@
                         <div class="popular_categories_prev popular_categories_nav"><i class="fa fa-angle-left ml-auto"></i></div>
                         <div class="popular_categories_next popular_categories_nav"><i class="fa fa-angle-right ml-auto"></i></div>
                     </div>
-                    <div class="popular_categories_link"><a href="#">Todo el Catalogo</a></div>
+                    <div class="popular_categories_link"><a href="/Articulos/Index">Todo el Catalogo</a></div>
                 </div>
             </div>
 
@@ -744,7 +745,7 @@
                                         <div class="arrivals_single_category"><a href="#">Smartphones</a></div>
                                         <div class="arrivals_single_name_container clearfix">
                                             <div class="arrivals_single_name"><a href="#">LUNA Smartphone</a></div>
-                                            <div class="arrivals_single_price text-right">$379</div>
+                                            <div class="arrivals_single_price text-right">₡379</div>
                                         </div>
                                         <div class="rating_r rating_r_4 arrivals_single_rating"><i></i><i></i><i></i><i></i><i></i></div>
                                         <form action="#"><button class="arrivals_single_button">Agregar al Carrito</button></form>
@@ -790,7 +791,7 @@
                             <div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
                                 <div class="viewed_image"><img src="~/images/view_1.jpg" alt=""></div>
                                 <div class="viewed_content text-center">
-                                    <div class="viewed_price">$225<span>$300</span></div>
+                                    <div class="viewed_price">₡225<span>₡300</span></div>
                                     <div class="viewed_name"><a href="#">Beoplay H7</a></div>
                                 </div>
                                 <ul class="item_marks">
@@ -805,7 +806,7 @@
                             <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
                                 <div class="viewed_image"><img src="~/images/view_2.jpg" alt=""></div>
                                 <div class="viewed_content text-center">
-                                    <div class="viewed_price">$379</div>
+                                    <div class="viewed_price">₡379</div>
                                     <div class="viewed_name"><a href="#">LUNA Smartphone</a></div>
                                 </div>
                                 <ul class="item_marks">
@@ -820,7 +821,7 @@
                             <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
                                 <div class="viewed_image"><img src="~/images/view_3.jpg" alt=""></div>
                                 <div class="viewed_content text-center">
-                                    <div class="viewed_price">$225</div>
+                                    <div class="viewed_price">₡225</div>
                                     <div class="viewed_name"><a href="#">Samsung J730F...</a></div>
                                 </div>
                                 <ul class="item_marks">
@@ -835,7 +836,7 @@
                             <div class="viewed_item is_new d-flex flex-column align-items-center justify-content-center text-center">
                                 <div class="viewed_image"><img src="~/images/view_4.jpg" alt=""></div>
                                 <div class="viewed_content text-center">
-                                    <div class="viewed_price">$379</div>
+                                    <div class="viewed_price">₡379</div>
                                     <div class="viewed_name"><a href="#">Huawei MediaPad...</a></div>
                                 </div>
                                 <ul class="item_marks">
@@ -850,7 +851,7 @@
                             <div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
                                 <div class="viewed_image"><img src="~/images/view_5.jpg" alt=""></div>
                                 <div class="viewed_content text-center">
-                                    <div class="viewed_price">$225<span>$300</span></div>
+                                    <div class="viewed_price">₡225<span>₡300</span></div>
                                     <div class="viewed_name"><a href="#">Sony PS4 Slim</a></div>
                                 </div>
                                 <ul class="item_marks">
@@ -865,7 +866,7 @@
                             <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
                                 <div class="viewed_image"><img src="~/images/view_6.jpg" alt=""></div>
                                 <div class="viewed_content text-center">
-                                    <div class="viewed_price">$375</div>
+                                    <div class="viewed_price">₡375</div>
                                     <div class="viewed_name"><a href="#">Speedlink...</a></div>
                                 </div>
                                 <ul class="item_marks">

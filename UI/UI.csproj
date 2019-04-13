@@ -343,6 +343,12 @@
     <Content Include="fonts\slick.eot" />
     <Content Include="fonts\slick.ttf" />
     <Content Include="fonts\slick.woff" />
+    <Content Include="Migrations_MongoDB\Categoria.json" />
+    <Content Include="Migrations_MongoDB\Cliente.json" />
+    <Content Include="Migrations_MongoDB\Factura.json" />
+    <Content Include="Migrations_MongoDB\fs.chunks.json" />
+    <Content Include="Migrations_MongoDB\fs.files.json" />
+    <Content Include="Migrations_MongoDB\Producto.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
