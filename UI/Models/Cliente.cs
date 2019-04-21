@@ -12,8 +12,10 @@ namespace UI.Models
     {
         [BsonId]
         [Required]
+        [DisplayName("Cedula")]
         public String Cedula { get; set; }
         [Required]
+        [DisplayName("Nombre")]
         public String Nombre { get; set; }
         [Required]
         [DisplayName("Primer Apellido")]
@@ -22,21 +24,23 @@ namespace UI.Models
         [DisplayName("Segundo Apellido")]
         public String Segundo_Apellido { get; set; }
         [Required]
-        [BsonDateTimeOptions(DateOnly =true)]
+        [BsonDateTimeOptions(DateOnly = true)]
         [DisplayName("Fecha de Nacimiento")]
         public DateTime Fecha_Nacimiento { get; set; }
         [Required]
+        [DisplayName("Usuario")]
         public String Usuario { get; set; }
         [Required]
         [DisplayName("Contraseña")]
         public String Contrasena { get; set; }
+        [Required]
         [DisplayName("Dirección")]
         public String Direccion { get; set; }
         [Required]
         [DisplayName("Email")]
         public String Correo { get; set; }
 
-        
+        public String Targetas_Credito { get; set; }
 
         public IEnumerable<Producto> Deseos { get; set; }
 
