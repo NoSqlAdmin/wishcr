@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using MongoDB.Driver;
 using System.Web.Mvc;
 using UI.Models;
 
@@ -13,16 +10,92 @@ namespace UI.Controllers
         // GET: Auth
         public ActionResult Login()
         {
-            System.Web.HttpContext.Current.Session["userid"] = "113960817";
-            return RedirectToAction("Index", "Home");
+            //System.Web.HttpContext.Current.Session["userid"] = "113960817";
+            //return RedirectToAction("Index", "Home");
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(string password, string user)
+        public async System.Threading.Tasks.Task<ActionResult> LoginAsync(string Usuario, string Contrasena)
         {
-            System.Web.HttpContext.Current.Session["userid"] = "113960817";
-            return RedirectToAction("Index", "Home");
+            if (Usuario != "" && Contrasena != "")
+            {
+                MongoContext mc = new MongoContext();
+                var cliente = await mc.Clientes.Find(c => c.Usuario.Equals(Usuario)).FirstOrDefaultAsync();
+                if (cliente != null)
+                {
+                    if (cliente.Contrasena.Equals(Contrasena))
+                    {
+                        System.Web.HttpContext.Current.Session["userid"] = cliente.Cedula;
+                        return RedirectToAction("Index", "Home");
+
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Contrasena", "La contraseña o el usuario no coinciden");
+
+                        return View("Login");
+
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Usuario", "Usuario no encontrado");
+
+                    return View("Login");
+
+
+                }
+
+            }
+            else
+            {
+
+                return RedirectToAction("Login", "Auth");
+            }
+        }
+
+        [HttpGet]
+        // GET: Auth
+        public ActionResult LoginAdmin()
+        {
+            //System.Web.HttpContext.Current.Session["userid"] = "113960817";
+            //return RedirectToAction("Index", "Home");
+            return View();
+        }
+
+        [HttpPost]
+        public async System.Threading.Tasks.Task<ActionResult> LoginAdminAsync(string Usuario, string Contrasena)
+        {
+            if (Usuario != "" && Contrasena != "")
+            {
+
+                MongoContext mc = new MongoContext();
+                var admins = mc.Administradores.AsQueryable().ToList();
+                var admi = await mc.Administradores.Find(c => c.Usuario.Equals(Usuario)).FirstOrDefaultAsync();
+                if (admi != null)
+                {
+                    if (admi.Contrasena.Equals(Contrasena))
+                    {
+                        System.Web.HttpContext.Current.Session["userid"] = admi.Cedula;
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Contrasena", "La contraseña o el usuario no coinciden");
+                        return View("LoginAdmin");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Usuario", "Usuario no encontrado");
+                    return View("LoginAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("LoginAdmin", "Auth");
+            }
         }
 
         [HttpGet]

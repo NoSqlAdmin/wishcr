@@ -22,7 +22,7 @@ namespace UI.Controllers
         public IMongoCollection<Cliente> Clientes => DB.GetCollection<Cliente>("Cliente");
         public IMongoCollection<Categoria> Categorias => DB.GetCollection<Categoria>("Categoria");
         public IMongoCollection<Factura> Facturas => DB.GetCollection<Factura>("Factura");
-        public IMongoCollection<Administrador> Administradores => DB.GetCollection<Administrador>("Administador");
+        public IMongoCollection<Administrador> Administradores => DB.GetCollection<Administrador>("Administrador");
 
         public MongoContext()        //constructor   
         {

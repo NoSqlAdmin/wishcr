@@ -349,6 +349,7 @@
     <Content Include="Migrations_MongoDB\fs.chunks.json" />
     <Content Include="Migrations_MongoDB\fs.files.json" />
     <Content Include="Migrations_MongoDB\Producto.json" />
+    <Content Include="Migrations_MongoDB\Administrador.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -414,10 +415,13 @@
     <Content Include="Views\Carrito\Comprar.cshtml" />
     <Content Include="Views\Deseos\Index.cshtml" />
     <Content Include="Views\Cliente\Facturas.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Auth\View.cshtml" />
+    <Content Include="Views\Auth\LoginAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Auth\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -36,8 +36,13 @@ namespace UI.Models
         [DisplayName("Email")]
         public String Correo { get; set; }
 
-        public IEnumerable<Tarjeta> Targetas_Credito { get; set; }
+        
 
         public IEnumerable<Producto> Deseos { get; set; }
+
+        public static implicit operator Cliente(List<Cliente> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
