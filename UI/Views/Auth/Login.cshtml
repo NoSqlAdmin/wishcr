@@ -5,39 +5,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
+<div class="col-md-8 offset-md-2">
+    <div class="card" style="margin-top: 25px">
 
-<div class="card" style="margin-top: 25px">
+        @using (Html.BeginForm("LoginAsync", "Auth", FormMethod.Post))
+        {
 
-    @using (Html.BeginForm("LoginAsync", "Auth", FormMethod.Post))
-    {
+            <div class="card-header bg-dark text-light">
+                <h5 class="display-4 text-center" style="font-size: 35px">Ingresar a tu cuenta</h5>
+            </div>
+            <div class="card-body">
 
-        <div class="card-header">
-            <h2>Ingresar a tu cuenta</h2>
-        </div>
-        <div class="card-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Usuario, htmlAttributes: new { @class = "control-label text-center  col-md-6 offset-md-3" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Usuario, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.Usuario, new { htmlAttributes = new { @class = "form-control  col-md-6 offset-md-3" } })
+                    @Html.ValidationMessageFor(model => model.Usuario, "", new { @class = "text-danger  col-md-6 offset-md-3" })
 
-                @Html.EditorFor(model => model.Usuario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Usuario, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Contrasena, htmlAttributes: new { @class = "control-label text-center  col-md-6 offset-md-3" })
+
+                    @Html.EditorFor(model => model.Contrasena, new { htmlAttributes = new { @class = "form-control  col-md-6 offset-md-3" } })
+                    @Html.ValidationMessageFor(model => model.Contrasena, "", new { @class = "text-danger  col-md-6 offset-md-3" })
+
+                </div>
+
+                <input class="btn btn-primary btn-block  col-md-6 offset-md-3" type="submit" value="Login" />
 
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Contrasena, htmlAttributes: new { @class = "control-label col-md-2" })
-
-                @Html.EditorFor(model => model.Contrasena, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Contrasena, "", new { @class = "text-danger" })
-
-            </div>
-
-            <input class="btn btn-primary btn-block " type="submit" value="Login" />
-
-        </div>
 
 
 
-
-    }
+        }
+    </div>
 </div>

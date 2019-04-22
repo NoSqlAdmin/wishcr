@@ -6,7 +6,7 @@ namespace UI.Controllers
 {
     public class AuthController : Controller
     {
-        private MongoContext elContexto = new MongoContext();
+   
 
         [HttpGet]
         // GET: Auth
@@ -112,6 +112,7 @@ namespace UI.Controllers
         {
             try
             {
+                MongoContext elContexto = new MongoContext();
                 var clientes = elContexto.LosClientes;
                 clientes.InsertOne(cliente);
                 return RedirectToAction("Index", "Home");
