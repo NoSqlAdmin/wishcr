@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using MongoDB.Driver;
 using UI.Models;
 
+
 namespace UI.Controllers
 {
     public class ProductoController : Controller
@@ -14,7 +15,10 @@ namespace UI.Controllers
         // GET: Producto
         public ActionResult Index()
         {
-            return View();
+            MongoContext mc = new MongoContext();
+            var producto = mc.Productos;
+            var productos = producto.AsQueryable();
+            return View(productos);
         }
 
         // GET: Producto/Details/5
@@ -82,8 +86,9 @@ namespace UI.Controllers
         }
 
         // GET: Producto/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
+            
             return View();
         }
 
@@ -104,18 +109,22 @@ namespace UI.Controllers
         }
 
         // GET: Producto/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
+            MongoContext mc = new MongoContext();
+            //var documento = mc.DB.GetCollection<Producto>("Producto");
+            //var elimina = documento.FindOneAndDelete(Builders<Producto>.Filter.Eq("Id",id)
+            var producto = mc.Productos.DeleteOne(a => a.Id==id);
+            return RedirectToAction("Index");
         }
 
         // POST: Producto/Delete/5
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                
 
                 return RedirectToAction("Index");
             }
@@ -123,6 +132,6 @@ namespace UI.Controllers
             {
                 return View();
             }
-        }
+        }*/
     }
 }
