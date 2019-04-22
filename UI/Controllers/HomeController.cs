@@ -87,5 +87,11 @@ namespace UI.Controllers
             ViewBag.Message = "Your contact page.";
             return View();
         }
+
+        public ActionResult IndexAdmin()
+        {
+            
+            return View();
+        }
     }
 }

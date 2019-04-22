@@ -78,7 +78,7 @@ namespace UI.Controllers
                     if (admi.Contrasena.Equals(Contrasena))
                     {
                         System.Web.HttpContext.Current.Session["userid"] = admi.Cedula;
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("IndexAdmin","Home");
                     }
                     else
                     {
