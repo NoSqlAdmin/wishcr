@@ -44,13 +44,12 @@ namespace UI.Controllers
             return "~/images/" + id + ".png";
         }
 
-        public String SaveImage(string path)
+        public String SaveImage(string fileName, Stream stream)
         {
             MongoContext mc = new MongoContext();
             var database = mc.MongoCliente.GetDatabase("imagen");
             var bucket = new GridFSBucket(database);
-            var fileName = path;
-            using (var fs = new FileStream(fileName, FileMode.Open))
+            using (var fs = stream)
             {
                 var gridFsInfo = bucket.UploadFromStream(fileName, fs);
                 _id = gridFsInfo;

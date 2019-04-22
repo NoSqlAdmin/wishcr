@@ -12,6 +12,7 @@ namespace UI.Controllers
 {
     public class ClienteController : Controller
     {
+        private MongoContext elContexto = new MongoContext();
         // GET: Cliente
         public ActionResult Index()
         {
@@ -22,6 +23,21 @@ namespace UI.Controllers
         public ActionResult Details(int id)
         {
             return View();
+        }
+
+        public ActionResult Register(Cliente cliente)
+        {
+            try
+            {
+                var clientes = elContexto.LosClientes;
+                clientes.InsertOne(cliente);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+
         }
 
         // GET: Cliente/Create

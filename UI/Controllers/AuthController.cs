@@ -6,6 +6,8 @@ namespace UI.Controllers
 {
     public class AuthController : Controller
     {
+        private MongoContext elContexto = new MongoContext();
+
         [HttpGet]
         // GET: Auth
         public ActionResult Login()
@@ -106,9 +108,20 @@ namespace UI.Controllers
 
         [HttpPost]
         public ActionResult Register(Cliente cliente)
+
         {
-            return RedirectToAction("Index", "Home");
+            try
+            {
+                var clientes = elContexto.LosClientes;
+                clientes.InsertOne(cliente);
+                return RedirectToAction("Index", "Home");
+            }
+            catch
+            {
+                return View();
+            }
         }
+
 
         public ActionResult SessionDown()
         {
