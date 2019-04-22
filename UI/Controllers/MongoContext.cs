@@ -34,6 +34,17 @@ namespace UI.Controllers
             // Obteniendo la base de datos
             db = mongoCliente.GetDatabase(MongoDatabaseName);
         }
-        
+
+        public IMongoCollection<Cliente> LosClientes
+        {
+            get
+            {
+                return (db.GetCollection<Cliente>("Cliente"));
+            }
+            set
+            {
+            }
+        }
+
     }
 }
