@@ -25,9 +25,12 @@ namespace UI.Models
         public String Marca { get; set; }
         [Required]
         public Double Precio { get; set; }
+
+        private DateTime _Fecha_Ingreso = DateTime.Now.Date;
         [DisplayName("Fecha de Ingreso")]
         [BsonDateTimeOptions(DateOnly = true)]
-        public DateTime Fecha_Ingreso => DateTime.Now.Date;
+        public DateTime Fecha_Ingreso { get { return _Fecha_Ingreso; } set { _Fecha_Ingreso = value; } }
+
         [Required]
         public String Imagen { get; set; }
         [Required]
