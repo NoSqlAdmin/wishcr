@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using UI.Models;
 
@@ -12,6 +13,8 @@ namespace UI.Controllers
 {
     public class ProductoController : Controller
     {
+
+        
         // GET: Producto
         public ActionResult Index()
         {
@@ -86,21 +89,33 @@ namespace UI.Controllers
         }
 
         // GET: Producto/Edit/5
-        public ActionResult Edit()
+        public ActionResult Edit(string id)
         {
-            
+            MongoContext mc = new MongoContext();
+            var producto = mc.Productos.Find(a => a.Id == id);
             return View();
         }
 
         // POST: Producto/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string id, Producto producto)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                
+               
+                    MongoContext mc = new MongoContext();
+                    
+                    var filter = Builders<Producto>.Filter.Eq("_id", ObjectId.Parse(producto.Id));
+                    var nombre = producto.Nombre;
+                    var descripcion = producto.Descripcion;
+                    var marca = producto.Marca;
+                    var precio = producto.Precio;
+                    var imagen = producto.Imagen;                  
+                    //string idImagen = Gridfs.Default.SaveImage(file.FileName, file.InputStream);
+                    var update = Builders<Producto>.Update.Set(p => p.Nombre, nombre).Set(p => p.Descripcion, descripcion).Set(p => p.Marca, marca).Set(p => p.Precio, precio).Set(p => p.Imagen, imagen);
+                    mc.Productos.FindOneAndUpdate(filter, update);
+                    return RedirectToAction("Index");
             }
             catch
             {
@@ -114,24 +129,9 @@ namespace UI.Controllers
             MongoContext mc = new MongoContext();
             //var documento = mc.DB.GetCollection<Producto>("Producto");
             //var elimina = documento.FindOneAndDelete(Builders<Producto>.Filter.Eq("Id",id)
-            var producto = mc.Productos.DeleteOne(a => a.Id==id);
+            var producto = mc.Productos.DeleteOne(a => a.Id == id);
             return RedirectToAction("Index");
         }
 
-        // POST: Producto/Delete/5
-        /*[HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
     }
 }
