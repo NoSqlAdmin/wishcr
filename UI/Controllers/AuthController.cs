@@ -112,8 +112,8 @@ namespace UI.Controllers
         {
             try
             {
-                MongoContext elContexto = new MongoContext();
-                var clientes = elContexto.LosClientes;
+                MongoContext mc = new MongoContext();
+                var clientes = mc.Clientes;
                 clientes.InsertOne(cliente);
                 return RedirectToAction("Index", "Home");
             }

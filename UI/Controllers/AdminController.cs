@@ -20,7 +20,7 @@ namespace UI.Controllers
             var admin = mc.Administradores;
             var adminis = admin.AsQueryable();
             return View(adminis);
-            
+
         }
 
         // GET: Admin/Details/5
@@ -52,28 +52,24 @@ namespace UI.Controllers
             try
             {
                 // TODO: Add insert logic here
-               
-                    MongoContext mc = new MongoContext();
-                    
-                    Administrador administrador = new Administrador
-                    {
-                      
-                        
-                        Cedula = cedula,
-                        Nombre = nombre,
-                        Primer_Apellido = primer_Apellido,
-                        Segundo_Apellido = segundo_Apellido,
-                        Fecha_Nacimiento = fecha_Nacimiento,
-                        Usuario = usuario,
-                        Contrasena = contrasena,
-                        Direccion = direccion,
-                        Correo = correo,
-                         
-                    };
-                    mc.Administradores.InsertOne(administrador);
+
+                MongoContext mc = new MongoContext();
+                Administrador administrador = new Administrador
+                {
+                    Cedula = cedula,
+                    Nombre = nombre,
+                    Primer_Apellido = primer_Apellido,
+                    Segundo_Apellido = segundo_Apellido,
+                    Fecha_Nacimiento = fecha_Nacimiento,
+                    Usuario = usuario,
+                    Contrasena = contrasena,
+                    Direccion = direccion,
+                    Correo = correo,
+                };
+                mc.Administradores.InsertOne(administrador);
                 return RedirectToAction("IndexAdmin", "Home");
             }
-               
+
             catch
             {
                 var admin = new List<SelectListItem>();
@@ -121,8 +117,8 @@ namespace UI.Controllers
         }
 
         // GET: Admin/Delete/5
-       
-        public ActionResult Delete(String id )
+
+        public ActionResult Delete(String id)
         {
             MongoContext mc = new MongoContext();
 
@@ -131,7 +127,7 @@ namespace UI.Controllers
             return RedirectToAction("Index");
 
         }
-       
+
 
     }
 }
