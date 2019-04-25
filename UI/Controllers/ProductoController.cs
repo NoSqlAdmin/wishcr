@@ -14,7 +14,7 @@ namespace UI.Controllers
     public class ProductoController : Controller
     {
 
-        
+
         // GET: Producto
         public ActionResult Index()
         {
@@ -25,9 +25,11 @@ namespace UI.Controllers
         }
 
         // GET: Producto/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            MongoContext mc = new MongoContext();
+            var producto = mc.Productos.AsQueryable().First(a => a.Id.Equals(id));
+            return View(producto);
         }
 
         // GET: Producto/Create
@@ -70,10 +72,11 @@ namespace UI.Controllers
                     };
                     mc.Productos.InsertOne(producto);
                 }
-                else {
+                else
+                {
                     throw new FileNotFoundException();
                 }
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -92,30 +95,30 @@ namespace UI.Controllers
         public ActionResult Edit(string id)
         {
             MongoContext mc = new MongoContext();
-            var producto = mc.Productos.Find(a => a.Id == id);
-            return View();
+            var producto = mc.Productos.AsQueryable().First(a => a.Id.Equals(id));
+            return View(producto);
         }
 
         // POST: Producto/Edit/5
         [HttpPost]
-        public ActionResult Edit(string id, Producto producto)
+        public ActionResult Edit(string id, int codigo, string nombre, string descripcion, string marca, double precio, HttpPostedFileBase file)
         {
             try
             {
-                
-               
-                    MongoContext mc = new MongoContext();
-                    
-                    var filter = Builders<Producto>.Filter.Eq("_id", ObjectId.Parse(producto.Id));
-                    var nombre = producto.Nombre;
-                    var descripcion = producto.Descripcion;
-                    var marca = producto.Marca;
-                    var precio = producto.Precio;
-                    var imagen = producto.Imagen;                  
-                    //string idImagen = Gridfs.Default.SaveImage(file.FileName, file.InputStream);
+                MongoContext mc = new MongoContext();
+                var filter = Builders<Producto>.Filter.Eq("_id", ObjectId.Parse(id));
+                if (file != null)
+                {
+                    var imagen = Gridfs.Default.SaveImage(file.FileName, file.InputStream);
                     var update = Builders<Producto>.Update.Set(p => p.Nombre, nombre).Set(p => p.Descripcion, descripcion).Set(p => p.Marca, marca).Set(p => p.Precio, precio).Set(p => p.Imagen, imagen);
                     mc.Productos.FindOneAndUpdate(filter, update);
-                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    var update = Builders<Producto>.Update.Set(p => p.Nombre, nombre).Set(p => p.Descripcion, descripcion).Set(p => p.Marca, marca).Set(p => p.Precio, precio);
+                    mc.Productos.FindOneAndUpdate(filter, update);
+                }
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -127,9 +130,7 @@ namespace UI.Controllers
         public ActionResult Delete(string id)
         {
             MongoContext mc = new MongoContext();
-            //var documento = mc.DB.GetCollection<Producto>("Producto");
-            //var elimina = documento.FindOneAndDelete(Builders<Producto>.Filter.Eq("Id",id)
-            var producto = mc.Productos.DeleteOne(a => a.Id == id);
+            var producto = mc.Productos.DeleteOne(a => a.Id.Equals(id));
             return RedirectToAction("Index");
         }
 
