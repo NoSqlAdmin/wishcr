@@ -73,12 +73,15 @@
     </div>
 </div>
 
-<form class="form-inline" method="get" action="/Carrito/Comprar">
-    <div class="col-8 offset-2 text-left form-group">
-        <div class="col-9"><h3 class="text-primary">Desea confirmar la compra</h3></div>
-        <div class="col-3"><button type="submit" class="btn btn-outline-success col-12">Confirmar</button></div>
-    </div>
-</form>
+@if(Model.Count() > 0)
+{
+    <form class="form-inline" method="get" action="/Carrito/Comprar">
+        <div class="col-8 offset-2 text-left form-group">
+            <div class="col-9"><h3 class="text-primary">Desea confirmar la compra</h3></div>
+            <div class="col-3"><button type="submit" class="btn btn-outline-success col-12">Confirmar</button></div>
+        </div>
+    </form>
+}
 
 
 @section Scripts {
