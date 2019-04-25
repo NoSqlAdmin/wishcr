@@ -1,0 +1,1 @@
+{"_id":"113960817","Nombre":"David","Primer_Apellido":"Campos","Segundo_Apellido":"Chavarría","Fecha_Nacimiento":{"$date":{"$numberLong":"958176000000"}},"Usuario":"davidcc","Contrasena":"contraseña","Direccion":"La león 13","Correo":"david@gmail.com","Targetas_Credito":"66-4646-44-4455","Deseos":[]}

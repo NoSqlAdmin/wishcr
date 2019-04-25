@@ -1,0 +1,44 @@
+﻿@model UI.Models.Administrador
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="col-md-8 offset-md-2">
+    <div class="card" style="margin-top: 25px">
+
+        @using (Html.BeginForm("LoginAdminAsync", "Auth", FormMethod.Post))
+        {
+
+            <div class="card-header bg-dark text-light">
+                <h5 class="display-4 text-center" style="font-size: 35px">Ingresar a Administración</h5>
+            </div>
+            <div class="card-body">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Usuario, htmlAttributes: new { @class = "control-label text-center  col-md-6 offset-md-3" })
+
+                    @Html.EditorFor(model => model.Usuario, new { htmlAttributes = new { @class = "form-control col-md-6 offset-md-3" } })
+                    @Html.ValidationMessageFor(model => model.Usuario, "", new { @class = "text-danger  col-md-6 offset-md-3" })
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Contrasena, htmlAttributes: new { @class = "control-label text-center  col-md-6 offset-md-3" })
+
+                    @Html.EditorFor(model => model.Contrasena, new { htmlAttributes = new { @class = "form-control col-md-6 offset-md-3" } })
+                    @Html.ValidationMessageFor(model => model.Contrasena, "", new { @class = "text-danger  col-md-6 offset-md-3" })
+
+                </div>
+
+                <input class="btn btn-primary btn-block  col-md-6 offset-md-3" type="submit" value="Login" />
+
+            </div>
+
+
+
+
+        }
+    </div>
+</div>

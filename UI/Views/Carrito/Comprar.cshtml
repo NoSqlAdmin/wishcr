@@ -1,0 +1,198 @@
+﻿@model UI.Models.Factura
+
+@{
+    ViewBag.Title = "Comprar";
+    Layout = "~/Views/Shared/_Layout_Usuario.cshtml";
+}
+
+<h1 class="display-4">Factura</h1>
+
+<div class="row shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+
+                <div class="form-inline">
+                    <div class="form-group col-6">
+                        <div class="col-form-label">
+                            @Html.DisplayNameFor(model => model.Empresa):
+                        </div>
+
+                        <div class="col-form-label pl-1">
+                            @Html.DisplayFor(model => model.Empresa)
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <div class="col-form-label">
+                            @Html.DisplayNameFor(model => model.Cedula_Juridica):
+                        </div>
+
+                        <div class="col-form-label pl-1">
+                            @Html.DisplayFor(model => model.Cedula_Juridica)
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <div class="col-form-label">
+                            @Html.DisplayNameFor(model => model.Numero_Factura):
+                        </div>
+
+                        <div class="col-form-label pl-1">
+                            @Html.DisplayFor(model => model.Numero_Factura)
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <div class="col-form-label">
+                            @Html.DisplayNameFor(model => model.Fecha):
+                        </div>
+
+                        <div class="col-form-label pl-1">
+                            @Html.DisplayFor(model => model.Fecha)
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <h5>Cliente</h5>
+                <div class="form-inline">
+                    <div class="form-group col-4">
+                        <div class="col-form-label">
+                            @Html.DisplayNameFor(model => model.Cliente.Cedula):
+                        </div>
+
+                        <div class="col-form-label pl-1">
+                            @Html.DisplayFor(model => model.Cliente.Cedula)
+                        </div>
+                    </div>
+                    <div class="form-group col-4">
+                        <div class="col-form-label">
+                            @Html.DisplayNameFor(model => model.Cliente.Nombre):
+                        </div>
+
+                        <div class="col-form-label pl-1">
+                            @Html.DisplayFor(model => model.Cliente.Nombre)
+                        </div>
+                    </div>
+                    <div class="form-group col-4">
+                        <div class="col-form-label">
+                            @Html.DisplayNameFor(model => model.Cliente.Primer_Apellido):
+                        </div>
+
+                        <div class="col-form-label pl-1">
+                            @Html.DisplayFor(model => model.Cliente.Primer_Apellido)
+                        </div>
+                    </div>
+                    <div class="form-group col-4">
+                        <div class="col-form-label">
+                            @Html.DisplayNameFor(model => model.Cliente.Segundo_Apellido):
+                        </div>
+
+                        <div class="col-form-label pl-1">
+                            @Html.DisplayFor(model => model.Cliente.Segundo_Apellido)
+                        </div>
+                    </div>
+                    <div class="form-group col-4">
+                        <div class="col-form-label">
+                            @Html.DisplayNameFor(model => model.Cliente.Direccion):
+                        </div>
+
+                        <div class="col-form-label pl-1">
+                            @Html.DisplayFor(model => model.Cliente.Direccion)
+                        </div>
+                    </div>
+                    <div class="form-group col-4">
+                        <div class="col-form-label">
+                            @Html.DisplayNameFor(model => model.Cliente.Correo):
+                        </div>
+
+                        <div class="col-form-label pl-1">
+                            @Html.DisplayFor(model => model.Cliente.Correo)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <hr />
+                <div class="text-center"><h3>Detalle de Compras</h3></div>
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Detalles.First().Cantidad)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Detalles.First().Producto.Codigo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Detalles.First().Producto.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Detalles.First().Producto.Descripcion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Detalles.First().Producto.Marca)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Detalles.First().Producto.Precio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Detalles.First().Subtotal)
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.Detalles)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cantidad)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Producto.Codigo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Producto.Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Producto.Marca)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Producto.Precio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Subtotal)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+        </div>
+    <div class="text-black offset-10">
+        <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Subtotal): 
+            @Html.DisplayFor(model => model.Subtotal)
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IVA): 
+            @Html.DisplayFor(model => model.IVA)
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total): 
+            @Html.DisplayFor(model => model.Total)
+        </dt>
+
+        </dl>
+    </div>
+</div>
+
+<form class="form-inline" method="post" action="/Carrito/Facturar">
+    <div class="col-8 offset-2 text-left form-group">
+        <div class="col-9"><h3 class="text-primary">Validar Factura</h3></div>
+        <div class="col-3"><button type="submit" class="btn btn-outline-success col-12">Firmar</button></div>
+    </div>
+</form>

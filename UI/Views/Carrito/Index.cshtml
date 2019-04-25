@@ -1,0 +1,91 @@
+﻿
+@using UI.Models;
+@using UI.Controllers;
+@model IEnumerable<UI.Models.Detalle>
+@{
+    ViewBag.Title = "Productos";
+    Layout = "~/Views/Shared/_Layout_Usuario.cshtml";
+}
+
+
+
+@section Styles {
+    @Styles.Render("~/Content/shop_styles.css")
+    @Styles.Render("~/Content/shop_responsive.css")
+}
+
+<h1 class="display-4">Lista de Compras</h1>
+<p class="text-info">Subtotal a Pagar = @Model.Sum(d => d.Subtotal) no incluye inpuestos u otros gastos</p>
+<!-- Shop -->
+
+<div class="shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <!-- Shop Content -->
+
+                <div class="shop_content">
+                    <div class="shop_bar clearfix">
+                        <div class="shop_product_count"><span>@Model.Count()</span> productos a comprar</div>
+                        <div class="shop_sorting">
+                            <span>Ordenar por:</span>
+                            <ul>
+                                <li>
+                                    <span class="sorting_text">Mejor valorados<i class="fa fa-chevron-down"></i></span>
+                                    <ul>
+                                        <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>Mejor valorados</li>
+                                        <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>Nombre</li>
+                                        <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "price" }'>Precio</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="product_grid">
+                        <div class="product_grid_border"></div>
+                        @{int i = 0;}
+                        @foreach (var p in Model)
+                        {
+                            <!-- Product Item -->
+                            <div class="product_item">
+                                <div class="product_border"></div>
+                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="@Href(Gridfs.Default.GetImagePath(p.Producto.Imagen))" alt=""></div>
+                                <div class="product_content">
+                                    <div class="product_price">@p.Producto.Precio ₡</div>
+                                    <div class="product_name"><div><a href="#" tabindex="0">@p.Producto.Nombre</a></div></div>
+                                    <div class="text-info">Cantidad: @p.Cantidad</div>
+                                    <div class="text-info">Subtotal: @p.Subtotal</div>
+                                </div>
+                                @Html.ActionLink("Quitar", "Delete", new { id = i }, htmlAttributes: new { @class = "btn btn-outline-danger btn-sm" })
+                                <ul class="product_marks">
+                                    <li class="product_mark product_discount"></li>
+                                    <li class="product_mark product_new">new</li>
+                                </ul>
+                            </div>
+                            i++;
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if(Model.Count() > 0)
+{
+    <form class="form-inline" method="get" action="/Carrito/Comprar">
+        <div class="col-8 offset-2 text-left form-group">
+            <div class="col-9"><h3 class="text-primary">Desea confirmar la compra</h3></div>
+            <div class="col-3"><button type="submit" class="btn btn-outline-success col-12">Confirmar</button></div>
+        </div>
+    </form>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/isotope.pkgd.min.js")
+    @Scripts.Render("~/bundles/compras")
+    @Scripts.Render("~/Scripts/shop_custom.js")
+}

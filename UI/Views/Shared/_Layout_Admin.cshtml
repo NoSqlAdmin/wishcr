@@ -1,0 +1,87 @@
+﻿
+
+<!DOCTYPE html>
+<html class="h-100">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - WishCR</title>
+
+   
+
+    <link href="~/Content/admin.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+
+    @RenderSection("styles", required: false)
+
+</head>
+<body>
+      <header class="header">
+        <div class="area"></div><nav class="main-menu">
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home fa-2x"></i>
+                        <span class="nav-text">
+                            Inicio
+                        </span>
+                    </a>
+
+                </li>
+                <li class="has-subnav">
+                    <a href="/Cliente/Index">
+                        <i class="fa fa-users fa-2x"></i>
+                        <span class="nav-text">
+                            Mantenimiento de Clientes
+                        </span>
+                    </a>
+
+                </li>
+                <li class="has-subnav">
+                    <a href="#">
+                        <i class="fa fa-shopping-bag fa-2x"></i>
+                        <span class="nav-text">
+                           Mantenimiento de Productos
+                        </span>
+                    </a>
+
+                </li>
+                <li class="has-subnav">
+                    <a href="/Admin/Index">
+                        <i class="fa fa-id-card fa-2x"></i>
+                        <span class="nav-text">
+                            Mantenimiento de Admin
+                        </span>
+                    </a>
+
+                </li>
+              
+            </ul>
+
+            <ul class="logout">
+                <li>
+                    <a href="/Auth/SessionDown">
+                        <i class="fa fa-power-off fa-2x"></i>
+                        <span class="nav-text">
+                           Cerrar Sesion
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+
+   
+
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
