@@ -16,7 +16,9 @@ namespace UI.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
-            return View();
+            MongoContext mc = new MongoContext();
+            var clientes = mc.Clientes.AsQueryable().ToList();
+            return View(clientes);
         }
 
         // GET: Cliente/Details/5
