@@ -22,6 +22,10 @@ namespace UI.Models
         [DisplayName("Segundo Apellido")]
         public String Segundo_Apellido { get; set; }
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayName("Fecha de Nacimiento")]
+        public DateTime Fecha_Nacimiento { get; set; }
+        [Required]
         public String Usuario { get; set; }
         [Required]
         [DisplayName("Contraseña")]
