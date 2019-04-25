@@ -79,7 +79,7 @@ namespace UI.Controllers
                 {
                     if (admi.Contrasena.Equals(Contrasena))
                     {
-                        System.Web.HttpContext.Current.Session["userid"] = admi.Cedula;
+                        System.Web.HttpContext.Current.Session["adminid"] = admi.Cedula;
                         return RedirectToAction("IndexAdmin","Home");
                     }
                     else
@@ -127,6 +127,7 @@ namespace UI.Controllers
         public ActionResult SessionDown()
         {
             System.Web.HttpContext.Current.Session["userid"] = null;
+            System.Web.HttpContext.Current.Session["adminid"] = null;
             Store.Default.Carrito.Clear();
             return RedirectToAction("Index", "Home");
         }

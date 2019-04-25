@@ -6,10 +6,10 @@
     ViewBag.Title = "IndexAdmin";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     
-    if (Session["userid"] != null)
+    if (Session["adminid"] != null)
     {
         MongoContext mc = new MongoContext();
-        ViewBag.Name = mc.Administradores.Find(c => c.Cedula.Equals(Session["userid"])).FirstOrDefault().Nombre;
+        ViewBag.Name = mc.Administradores.Find(c => c.Cedula.Equals(Session["adminid"])).FirstOrDefault().Nombre;
 
         <div class="jumbotron" style="margin-top:50px">
             <h1 class="display-4">Hola @ViewBag.Name bienvenido a la consola administrativa</h1>
