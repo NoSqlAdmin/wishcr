@@ -42,12 +42,18 @@ namespace UI.Controllers
                 categorias.Add(new SelectListItem { Value = c.Id, Text = c.Nombre });
             });
             ViewBag.Categorias = categorias;
-            return View();
+            Producto p = new Producto()
+            {
+                Valoracion = new Valoracion { Total_Valoraciones = 1, Valor = 1 },
+                Stock = new Stock() { EnBodega = 0, EnVenta = 1},
+                Imagen_ID = ObjectId.GenerateNewId()
+            };
+            return View(p);
         }
 
         // POST: Producto/Create
         [HttpPost]
-        public ActionResult Create(int codigo, string nombre, string descripcion, string marca, double precio, string categoria, string enventa, string enbodega, string valoracion, HttpPostedFileBase file)
+        public ActionResult Create(string categoria,Producto p, HttpPostedFileBase file)
         {
             try
             {
@@ -59,16 +65,16 @@ namespace UI.Controllers
                     Categoria catego = mc.Categorias.AsQueryable<Categoria>().ToList().First(c => c.Id.Equals(categoria));
                     Producto producto = new Producto
                     {
-                        Stock = new Stock { EnBodega = Convert.ToInt32(enbodega), EnVenta = Convert.ToInt32(enventa) },
+                        Stock = new Stock { EnBodega = p.Stock.EnBodega, EnVenta = p.Stock.EnVenta },
                         Categoria = catego,
-                        Codigo = codigo,
-                        Descripcion = descripcion,
+                        Codigo = p.Codigo,
+                        Descripcion = p.Descripcion,
                         Fecha_Ingreso = DateTime.Now.Date,
                         Imagen = idImagen,
-                        Marca = marca,
-                        Nombre = nombre,
-                        Precio = precio,
-                        Valoracion = new Valoracion { Total_Valoraciones = 1, Valor = Convert.ToInt32(valoracion) }
+                        Marca = p.Marca,
+                        Nombre = p.Nombre,
+                        Precio = p.Precio,
+                        Valoracion = new Valoracion { Total_Valoraciones = 1, Valor = p.Valoracion.Valor }
                     };
                     mc.Productos.InsertOne(producto);
                 }

@@ -38,9 +38,11 @@ namespace UI.Models
         [DisplayName("Dirección")]
         public String Direccion { get; set; }
         [Required]
+        [DataType(dataType: DataType.EmailAddress)]
         [DisplayName("Email")]
         public String Correo { get; set; }
-
+        [Required]
+        [DisplayName("Targeta de Credito")]
         public String Targetas_Credito { get; set; }
 
         public IEnumerable<Producto> Deseos { get; set; }

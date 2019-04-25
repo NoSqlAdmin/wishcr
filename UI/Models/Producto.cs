@@ -39,6 +39,6 @@ namespace UI.Models
         public Valoracion Valoracion { get; set; }
 
         [BsonIgnore]
-        public ObjectId Imagen_ID { get { return ObjectId.Parse(Imagen); } set { Imagen = value.ToString(); } }
+        public ObjectId? Imagen_ID { get { return ObjectId.Parse(Imagen); } set { Imagen = value.ToString(); } }
     }
 }

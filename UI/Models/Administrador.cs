@@ -33,6 +33,7 @@ namespace UI.Models
         [DisplayName("Dirección")]
         public String Direccion { get; set; }
         [Required]
+        [DataType(dataType: DataType.EmailAddress)]
         [DisplayName("Email")]
         public String Correo { get; set; }
     }
