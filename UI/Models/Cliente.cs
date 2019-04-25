@@ -26,6 +26,7 @@ namespace UI.Models
         [Required]
         [BsonDateTimeOptions(DateOnly = true)]
         [DisplayName("Fecha de Nacimiento")]
+        [DataType(dataType: DataType.Date)]
         public DateTime Fecha_Nacimiento { get; set; }
         [Required]
         [DisplayName("Usuario")]
