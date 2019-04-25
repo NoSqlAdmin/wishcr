@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using UI.Models;
 
@@ -114,6 +115,7 @@ namespace UI.Controllers
             {
                 MongoContext mc = new MongoContext();
                 var clientes = mc.Clientes;
+                cliente.Deseos = new List<Producto>();
                 clientes.InsertOne(cliente);
                 return RedirectToAction("Index", "Home");
             }
