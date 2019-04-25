@@ -1,4 +1,5 @@
 ﻿@using UI.Models;
+@using UI.Controllers;
 @model IEnumerable<UI.Models.Producto>
 @{
     ViewBag.Title = "Productos";
@@ -52,7 +53,7 @@
                             <!-- Product Item -->
                             <div class="product_item">
                                 <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="~/images/featured_2.png" alt=""></div>
+                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="@Href(Gridfs.Default.GetImagePath(p.Imagen))" alt=""></div>
                                 <div class="product_content">
                                     <div class="product_price">@p.Precio ₡</div>
                                     <div class="product_name"><div><a href="#" tabindex="0">@p.Nombre</a></div></div>
@@ -85,51 +86,6 @@
                                 </ul>
                             </div>
                         }
-                        <!-- Product Item -->
-                        @*<div class="product_item">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="~/images/featured_2.png" alt=""></div>
-                                <div class="product_content">
-                                    <div class="product_price">379 ₡</div>
-                                    <div class="product_name"><div><a href="#" tabindex="0">Apple iPod shuffle</a></div></div>
-                                </div>
-                                <div class="product_fav"><i class="fa fa-heart"></i></div>
-                                <ul class="product_marks">
-                                    <li class="product_mark product_discount">-25%</li>
-                                    <li class="product_mark product_new">new</li>
-                                </ul>
-                            </div>*@
-
-                        <!-- Product Item -->
-                        <div class="product_item is_new">
-                            <div class="product_border"></div>
-                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="~/images/shop_2.jpg" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_price">$225</div>
-                                <div class="product_name"><div><a href="#" tabindex="0">Gembird SPK-103</a></div></div>
-                            </div>
-                            <div class="product_fav"><i class="fa fa-heart"></i></div>
-                            <ul class="product_marks">
-                                <li class="product_mark product_discount">-25%</li>
-                                <li class="product_mark product_new">new</li>
-                            </ul>
-                        </div>
-
-                        <!-- Product Item -->
-                        <div class="product_item is_new">
-                            <div class="product_border"></div>
-                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="~/images/featured_5.png" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_price">$379</div>
-                                <div class="product_name"><div><a href="#" tabindex="0">Canon STM Kit...</a></div></div>
-                            </div>
-                            <div class="product_fav"><i class="fa fa-heart"></i></div>
-                            <ul class="product_marks">
-                                <li class="product_mark product_discount">-25%</li>
-                                <li class="product_mark product_new">new</li>
-                            </ul>
-                        </div>
-
                     </div>
                 </div>
 
