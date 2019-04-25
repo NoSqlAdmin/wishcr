@@ -1,2 +1,0 @@
-# wishcr
-Store

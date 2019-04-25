@@ -1,7 +1,0 @@
-{"_id":{"$oid":"5cad8712d7e1be30909f6dfa"},"Nombre":"Computadoras y Laptops","Descripcion":"Toda la gama de PC"}
-{"_id":{"$oid":"5cad8c6ed7e1be0584a103e3"},"Nombre":"Camaras","Descripcion":"Todo en camaras y accesorios de fotografia"}
-{"_id":{"$oid":"5cad8c6fd7e1be0584a103e4"},"Nombre":"Hardware","Descripcion":"Hardware para PC"}
-{"_id":{"$oid":"5cad8c6fd7e1be0584a103e5"},"Nombre":"Smartphones y Tablets","Descripcion":"Toda la gama de Celurales"}
-{"_id":{"$oid":"5cad8c6fd7e1be0584a103e6"},"Nombre":"TV y Audio","Descripcion":"Toda la gama de TV"}
-{"_id":{"$oid":"5cad8c6fd7e1be0584a103e7"},"Nombre":"Video Juegos y Consolas","Descripcion":"Area de articulos para jugadores"}
-{"_id":{"$oid":"5cad8c6fd7e1be0584a103e8"},"Nombre":"Accessorios","Descripcion":"Accesorios de diversos tipos"}

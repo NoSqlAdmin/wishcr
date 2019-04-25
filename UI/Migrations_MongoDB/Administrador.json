@@ -1,1 +1,0 @@
-{"_id":"116880394","Nombre":"Edwin","Primer_Apellido":"Zuñiga","Segundo_Apellido":"Sobalvarro","Fecha_Nacimiento":{"$date":{"$numberLong":"871603200000"}},"Usuario":"torake","Contrasena":"1234","Direccion":"curridabat","Correo":"xxtorakexx@gmail.com"}
